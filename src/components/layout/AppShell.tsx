@@ -22,6 +22,24 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const { totalCartCount } = useCart();
 
   useEffect(() => {
+    // 1. Prefetch all main Next.js routes for instant zero-delay navigation
+    router.prefetch('/');
+    router.prefetch('/products');
+    router.prefetch('/about');
+    router.prefetch('/contact');
+    router.prefetch('/account');
+    router.prefetch('/orders');
+    router.prefetch('/checkout');
+
+    // 2. Catch stale chunk load errors during dev/deploys and reload smoothly
+    const handleChunkError = (e: ErrorEvent) => {
+      if (e.message && (e.message.includes('Loading chunk') || e.message.includes('ChunkLoadError'))) {
+        console.warn('[Next.js] Stale chunk detected, refreshing page...');
+        window.location.reload();
+      }
+    };
+    window.addEventListener('error', handleChunkError);
+
     // Check if on mobile view and splash has not been shown in this session
     if (typeof window !== 'undefined' && window.innerWidth < 1024) {
       const dismissed = sessionStorage.getItem('vsn_mobile_splash_shown');
@@ -29,7 +47,11 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
         setShowSplash(true);
       }
     }
-  }, []);
+
+    return () => {
+      window.removeEventListener('error', handleChunkError);
+    };
+  }, [router]);
 
   const handleSplashContinue = () => {
     sessionStorage.setItem('vsn_mobile_splash_shown', 'true');

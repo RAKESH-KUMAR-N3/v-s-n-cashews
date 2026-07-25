@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
 import { Home, Package, PhoneCall, LogIn, User } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { ActiveView } from '@/config/site';
@@ -27,7 +28,9 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
     <nav className="mobile-bottom-nav-fixed">
       <div className="w-full grid grid-cols-4 items-center px-1">
         {/* 1. Home */}
-        <button
+        <Link
+          href="/"
+          prefetch={true}
           onClick={() => handleNav('home')}
           className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all ${
             activeView === 'home'
@@ -37,10 +40,12 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
         >
           <Home className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37]" />
           <span className="text-[9px] uppercase tracking-wider font-semibold text-white">Home</span>
-        </button>
+        </Link>
 
         {/* 2. Products */}
-        <button
+        <Link
+          href="/products"
+          prefetch={true}
           onClick={() => handleNav('products')}
           className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all ${
             activeView === 'products'
@@ -50,10 +55,12 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
         >
           <Package className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37]" />
           <span className="text-[9px] uppercase tracking-wider font-semibold text-white">Products</span>
-        </button>
+        </Link>
 
         {/* 3. Contact */}
-        <button
+        <Link
+          href="/contact"
+          prefetch={true}
           onClick={() => handleNav('contact')}
           className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all ${
             activeView === 'contact'
@@ -63,11 +70,13 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
         >
           <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37]" />
           <span className="text-[9px] uppercase tracking-wider font-semibold text-white">Contact</span>
-        </button>
+        </Link>
 
         {/* 4. Login/Register OR Account */}
         {userMode === 'LOGGED_IN' ? (
-          <button
+          <Link
+            href="/account"
+            prefetch={true}
             onClick={() => handleNav('account')}
             className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all cursor-pointer ${
               activeView === 'account' || activeView === 'orders'
@@ -79,11 +88,11 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
             <span className="text-[9px] uppercase tracking-wider font-semibold text-[#F3E5AB] max-w-[60px] truncate">
               {userProfile?.name?.split(' ')[0] || 'Account'}
             </span>
-          </button>
+          </Link>
         ) : (
           <button
             onClick={onOpenAuthModal}
-            className="flex flex-col items-center justify-center gap-0.5 py-1 text-[#D4AF37] hover:text-[#F3E5AB] font-bold"
+            className="flex flex-col items-center justify-center gap-0.5 py-1 text-[#D4AF37] hover:text-[#F3E5AB] font-bold cursor-pointer"
           >
             <LogIn className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37]" />
             <span className="text-[9px] uppercase tracking-tighter text-[#D4AF37]">Login</span>

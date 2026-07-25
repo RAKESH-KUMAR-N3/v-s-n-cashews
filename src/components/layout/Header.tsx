@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { ShoppingBag, Bell, Search, X, CheckCheck, LogOut } from 'lucide-react';
 import { ActiveView } from '@/config/site';
 import { VsnLogo } from '@/components/ui/VsnLogo';
@@ -46,8 +47,7 @@ export const Header: React.FC<HeaderProps> = ({
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleNavClick = (view: ActiveView, e: React.MouseEvent) => {
-    e.preventDefault();
+  const handleNavClick = (view: ActiveView) => {
     onNavigate(view);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -63,14 +63,21 @@ export const Header: React.FC<HeaderProps> = ({
       {/* 1. Main Header Top Bar */}
       <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-2 w-full">
         {/* Brand Logo & Crisp Typography */}
-        <div onClick={(e) => handleNavClick('home', e)} className="shrink-0 cursor-pointer py-1">
+        <Link
+          href="/"
+          prefetch={true}
+          onClick={() => handleNavClick('home')}
+          className="shrink-0 cursor-pointer py-1"
+        >
           <VsnLogo size="lg" />
-        </div>
+        </Link>
 
         {/* Desktop Navbar Links */}
         <nav className="hidden lg:flex items-center gap-8">
-          <button
-            onClick={(e) => handleNavClick('products', e)}
+          <Link
+            href="/products"
+            prefetch={true}
+            onClick={() => handleNavClick('products')}
             className={`text-sm uppercase tracking-widest py-2 transition-all font-bold border-b-2 cursor-pointer ${
               activeView === 'products'
                 ? 'text-[#D4AF37] border-[#D4AF37]'
@@ -78,10 +85,12 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             Products
-          </button>
+          </Link>
 
-          <button
-            onClick={(e) => handleNavClick('about', e)}
+          <Link
+            href="/about"
+            prefetch={true}
+            onClick={() => handleNavClick('about')}
             className={`text-sm uppercase tracking-widest py-2 transition-all font-bold border-b-2 cursor-pointer ${
               activeView === 'about'
                 ? 'text-[#D4AF37] border-[#D4AF37]'
@@ -89,7 +98,7 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             About
-          </button>
+          </Link>
 
           <button
             onClick={onOpenCart}
@@ -98,8 +107,10 @@ export const Header: React.FC<HeaderProps> = ({
             Cart ({cartCount})
           </button>
 
-          <button
-            onClick={(e) => handleNavClick('contact', e)}
+          <Link
+            href="/contact"
+            prefetch={true}
+            onClick={() => handleNavClick('contact')}
             className={`text-sm uppercase tracking-widest py-2 transition-all font-bold border-b-2 cursor-pointer ${
               activeView === 'contact'
                 ? 'text-[#D4AF37] border-[#D4AF37]'
@@ -107,7 +118,7 @@ export const Header: React.FC<HeaderProps> = ({
             }`}
           >
             Contact
-          </button>
+          </Link>
         </nav>
 
         {/* Right Header Action Icons: Notification, Clean Cart (No Box), Logout */}
