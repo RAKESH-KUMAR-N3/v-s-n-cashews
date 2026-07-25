@@ -1,0 +1,356 @@
+// Prisma Schema for V S N CASHEWS (MongoDB Provider)
+
+datasource db {
+  provider = "mongodb"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ==========================================
+// ENUMS
+// ==========================================
+
+enum Role {
+  USER
+  ADMIN
+  MANAGER
+}
+
+enum AddressType {
+  SHIPPING
+  BILLING
+  BOTH
+}
+
+enum OrderStatus {
+  PENDING
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum PaymentMethod {
+  RAZORPAY
+  COD
+  BANK_TRANSFER
+  UPI
+}
+
+enum QuotationStatus {
+  DRAFT
+  SENT
+  ACCEPTED
+  REJECTED
+  EXPIRED
+}
+
+enum InvoiceStatus {
+  UNPAID
+  PAID
+  VOID
+}
+
+// ==========================================
+// MODELS
+// ==========================================
+
+/// 1. User Model
+model User {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  name          String?
+  email         String    @unique
+  phone         String?
+  role          Role      @default(USER)
+  emailVerified Boolean   @default(false)
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  addresses     Address[]
+  orders        Order[]
+  quotations    Quotation[]
+  invoices      Invoice[]
+  wishlist      Wishlist?
+  testimonials  Testimonial[]
+}
+
+/// 2. Address Model
+model Address {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  userId      String      @db.ObjectId
+  user        User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type        AddressType @default(SHIPPING)
+  fullName    String
+  phone       String
+  street      String
+  city        String
+  state       String
+  pincode     String
+  country     String      @default("India")
+  landmark    String?
+  isDefault   Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  @@index([userId])
+}
+
+/// 3. Category Model
+model Category {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  image       String?
+  isActive    Boolean   @default(true)
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+/// 4. Product Model
+model Product {
+  id             String          @id @default(auto()) @map("_id") @db.ObjectId
+  name           String
+  slug           String          @unique
+  sku            String          @unique
+  description    String
+  grade          String          // e.g., "W-180", "W-240", "W-320", "Splits"
+  origin         String          @default("Mangalore, Karnataka")
+  basePrice      Float
+  images         String[]
+  inStock        Boolean         @default(true)
+  isFeatured     Boolean         @default(false)
+  isBestSeller   Boolean         @default(false)
+  rating         Float           @default(5.0)
+  reviewCount    Int             @default(0)
+
+  categoryId     String          @db.ObjectId
+  category       Category        @relation(fields: [categoryId], references: [id])
+
+  variants       Variant[]
+  orderItems     OrderItem[]
+  quotationItems QuotationItem[]
+
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([categoryId])
+  @@index([grade])
+}
+
+/// 5. Variant Model (Packaging & Weights e.g., 250g, 500g, 1kg)
+model Variant {
+  id             String          @id @default(auto()) @map("_id") @db.ObjectId
+  productId      String          @db.ObjectId
+  product        Product         @relation(fields: [productId], references: [id], onDelete: Cascade)
+  weight         String          // e.g., "250g", "500g", "1kg", "5kg Box"
+  sku            String          @unique
+  price          Float
+  compareAtPrice Float?
+  stockQuantity  Int             @default(100)
+  isAvailable    Boolean         @default(true)
+
+  orderItems     OrderItem[]
+  quotationItems QuotationItem[]
+
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+
+  @@index([productId])
+}
+
+/// 6. Order Model
+model Order {
+  id              String        @id @default(auto()) @map("_id") @db.ObjectId
+  orderNumber     String        @unique
+  userId          String        @db.ObjectId
+  user            User          @relation(fields: [userId], references: [id])
+  addressId       String?       @db.ObjectId
+  shippingAddress Json          // Address Snapshot
+  subtotal        Float
+  discountAmount  Float         @default(0)
+  shippingFee     Float         @default(0)
+  totalAmount     Float
+  status          OrderStatus   @default(PENDING)
+  paymentStatus   PaymentStatus @default(PENDING)
+
+  items           OrderItem[]
+  payment         Payment?
+  invoice         Invoice?
+
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+/// 7. OrderItem Model
+model OrderItem {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  orderId     String   @db.ObjectId
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String   @db.ObjectId
+  product     Product  @relation(fields: [productId], references: [id])
+  variantId   String?  @db.ObjectId
+  variant     Variant? @relation(fields: [variantId], references: [id])
+  weight      String
+  price       Float
+  quantity    Int
+  totalPrice  Float
+
+  @@index([orderId])
+  @@index([productId])
+}
+
+/// 8. Payment Model
+model Payment {
+  id                String        @id @default(auto()) @map("_id") @db.ObjectId
+  orderId           String        @unique @db.ObjectId
+  order             Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  paymentMethod     PaymentMethod @default(RAZORPAY)
+  transactionId     String?       @unique
+  razorpayOrderId   String?
+  razorpayPaymentId String?
+  razorpaySignature String?
+  amount            Float
+  currency          String        @default("INR")
+  status            PaymentStatus @default(PENDING)
+  rawResponse       Json?
+
+  createdAt         DateTime      @default(now())
+  updatedAt         DateTime      @updatedAt
+
+  @@index([status])
+}
+
+/// 9. Invoice Model
+model Invoice {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  invoiceNumber String        @unique
+  orderId       String        @unique @db.ObjectId
+  order         Order         @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  userId        String        @db.ObjectId
+  user          User          @relation(fields: [userId], references: [id])
+  amount        Float
+  taxAmount     Float         @default(0)
+  pdfUrl        String?
+  status        InvoiceStatus @default(PAID)
+  issuedAt      DateTime      @default(now())
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@index([userId])
+}
+
+/// 10. Quotation Model (For Bulk & Wholesale Commercial Buyers)
+model Quotation {
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  quotationNumber String          @unique
+  userId          String          @db.ObjectId
+  user            User            @relation(fields: [userId], references: [id])
+  companyName     String?
+  gstNumber       String?
+  status          QuotationStatus @default(DRAFT)
+  totalAmount     Float
+  notes           String?
+  validUntil      DateTime
+
+  items           QuotationItem[]
+
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@index([userId])
+  @@index([status])
+}
+
+/// 11. QuotationItem Model
+model QuotationItem {
+  id                String    @id @default(auto()) @map("_id") @db.ObjectId
+  quotationId       String    @db.ObjectId
+  quotation         Quotation @relation(fields: [quotationId], references: [id], onDelete: Cascade)
+  productId         String    @db.ObjectId
+  product           Product   @relation(fields: [productId], references: [id])
+  variantId         String?   @db.ObjectId
+  variant           Variant?  @relation(fields: [variantId], references: [id])
+  weight            String
+  requestedQuantity Int
+  unitPrice         Float
+  totalPrice        Float
+
+  @@index([quotationId])
+}
+
+/// 12. Wishlist Model
+model Wishlist {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String   @unique @db.ObjectId
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productIds String[] @db.ObjectId
+  updatedAt  DateTime @updatedAt
+}
+
+/// 13. Homepage Configuration Model
+model Homepage {
+  id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+  title               String
+  subtitle            String?
+  heroBannerUrl       String?
+  announcementText    String?
+  featuredCategoryIds String[] @db.ObjectId
+  featuredProductIds  String[] @db.ObjectId
+  isActive            Boolean  @default(true)
+  updatedAt           DateTime @updatedAt
+}
+
+/// 14. Settings Model
+model Setting {
+  id                    String   @id @default(auto()) @map("_id") @db.ObjectId
+  siteName              String   @default("V S N CASHEWS")
+  contactEmail          String   @default("orders@vsncashews.com")
+  contactPhone          String   @default("+91 98450 12345")
+  address               String   @default("Mangalore, Karnataka")
+  freeShippingThreshold Float    @default(1999)
+  currencySymbol        String   @default("₹")
+  currencyCode          String   @default("INR")
+  taxRatePercentage     Float    @default(5.0)
+  updatedAt             DateTime @updatedAt
+}
+
+/// 15. Testimonial Model
+model Testimonial {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId     String?  @db.ObjectId
+  user       User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  clientName String
+  location   String?
+  content    String
+  rating     Int      @default(5)
+  isApproved Boolean  @default(false)
+  createdAt  DateTime @default(now())
+}
+
+/// 16. Banner Model
+model Banner {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  imageUrl  String
+  link      String?
+  position  Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

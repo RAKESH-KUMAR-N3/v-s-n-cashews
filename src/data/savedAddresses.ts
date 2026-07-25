@@ -1,0 +1,43 @@
+import { Address } from '@/types';
+
+export const SAVED_ADDRESSES: Address[] = [
+  {
+    id: 'addr-1',
+    label: 'Home',
+    fullName: 'Rakesh Kumar',
+    phone: '9845012345',
+    email: 'nrakeshkumar36@gmail.com',
+    street: 'Flat 402, Sovereign Residency, 4th Main Road, Indiranagar',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    pincode: '560038',
+    landmark: 'Near 100 Feet Road Signal',
+    isDefault: true,
+  },
+  {
+    id: 'addr-2',
+    label: 'Estate',
+    fullName: 'Rakesh Kumar (Estate)',
+    phone: '9845098765',
+    email: 'nrakeshkumar36@gmail.com',
+    street: 'V S N Cashew Plantation, House No. 88, Baikampady Industrial Area',
+    city: 'Mangalore',
+    state: 'Karnataka',
+    pincode: '575011',
+    landmark: 'Opposite New Mangalore Port Gate 2',
+    isDefault: false,
+  },
+  {
+    id: 'addr-3',
+    label: 'Office',
+    fullName: 'Rakesh Kumar (Corporate Desk)',
+    phone: '9845012345',
+    email: 'corporate@vsncashews.com',
+    street: 'Suite 12, World Trade Tower, Outer Ring Road, Bellandur',
+    city: 'Bengaluru',
+    state: 'Karnataka',
+    pincode: '560103',
+    landmark: 'EcoWorld Campus 4B',
+    isDefault: false,
+  },
+];

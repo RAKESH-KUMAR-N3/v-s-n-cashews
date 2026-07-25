@@ -1,0 +1,60 @@
+{
+  "short_name": "VSN Cashews",
+  "name": "V S N CASHEWS - Royal Dry Fruits & Cashew Nuts",
+  "description": "Order premium export-grade Mangalore cashew nuts, roasted salted cashews, and luxury dry fruit gift boxes with direct processor rates & GST invoices.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0B132B",
+  "theme_color": "#0B132B",
+  "categories": ["shopping", "food", "business", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🥜</text></svg>",
+      "sizes": "96x96",
+      "type": "image/svg+xml"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Cashew Catalog",
+      "short_name": "Catalog",
+      "description": "Browse export-grade Mangalore cashews",
+      "url": "/?view=products"
+    },
+    {
+      "name": "B2B Wholesale Quotes",
+      "short_name": "Quotes",
+      "description": "Request bulk price quotations",
+      "url": "/?view=quotes"
+    },
+    {
+      "name": "Track Orders",
+      "short_name": "Orders",
+      "description": "Track your cashew shipments",
+      "url": "/?view=orders"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "https://images.unsplash.com/photo-1599599810769-bcde5a160d32?q=80&w=1200",
+      "sizes": "1200x630",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "V S N CASHEWS Storefront & Catalog"
+    }
+  ]
+}

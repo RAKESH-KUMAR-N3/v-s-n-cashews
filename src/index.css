@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy-bg: #0B132B;
+    --navy-surface: #1C2541;
+    --navy-card: #0F172A;
+    --gold-primary: #D4AF37;
+    --gold-light: #F3E5AB;
+    --gold-dark: #AA7C11;
+    --gold-accent: #E5C158;
+    --navy-slate: #3A506B;
+  }
+
+  body {
+    background-color: #0B132B;
+    color: #F8F9FA;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* Custom selection */
+  ::selection {
+    background: #D4AF37;
+    color: #0B132B;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0B132B;
+}
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 0px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #E5C158;
+}
+
+/* Metallic Gold Text Effect */
+.gold-gradient-text {
+  background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA7C11 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Royal Gold Foil Border */
+.gold-border {
+  border: 1px solid rgba(212, 175, 55, 0.35);
+}
+
+.gold-border-glow {
+  border: 1px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+}
+
+/* Shimmer Animation */
+@keyframes gold-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0) 0%,
+    rgba(243, 229, 171, 0.25) 50%,
+    rgba(212, 175, 55, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: gold-shimmer 3s infinite linear;
+}
+
+/* Strictly Square Design Utility */
+.square-box {
+  border-radius: 0px !important;
+}
