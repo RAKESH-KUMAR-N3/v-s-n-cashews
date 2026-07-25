@@ -5,13 +5,10 @@ import { motion } from 'motion/react';
 import {
   Star,
   ShoppingBag,
-  Eye,
   Check,
   Search,
   Filter,
   RefreshCw,
-  LayoutGrid,
-  List,
   ChevronLeft,
   ChevronRight,
 } from 'lucide-react';
@@ -19,8 +16,6 @@ import { Product, CashewWeight } from '@/types';
 import { formatPrice } from '@/lib/utils';
 import { SquareBadge } from '@/components/ui/SquareBadge';
 import { SquareButton } from '@/components/ui/SquareButton';
-import { SquareCard } from '@/components/ui/SquareCard';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
 
 interface ProductsViewProps {
   products?: Product[];
@@ -29,8 +24,6 @@ interface ProductsViewProps {
   initialSearchTerm?: string;
   initialCategory?: string;
 }
-
-const ALL_GRADES = ['All', 'W-180', 'W-240', 'W-320', 'Splits', 'Gourmet Flavored', 'Royal Gift Box'];
 
 export const ProductsView: React.FC<ProductsViewProps> = ({
   products = [],
@@ -43,15 +36,9 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
   const [searchTerm, setSearchTerm] = useState<string>(initialSearchTerm);
   const [selectedCategory, setSelectedCategory] = useState<string>(initialCategory);
   const [selectedGrade, setSelectedGrade] = useState<string>('All');
-  const [selectedWeightFilter, setSelectedWeightFilter] = useState<string>('All');
-  const [inStockOnly, setInStockOnly] = useState<boolean>(false);
-  const [maxPriceFilter, setMaxPriceFilter] = useState<number>(3000);
 
-  // Sorting & Layout
-  const [sortBy, setSortBy] = useState<
-    'featured' | 'price-asc' | 'price-desc' | 'rating' | 'stock' | 'name-asc'
-  >('featured');
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  // Sorting
+  const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'rating'>('featured');
 
   // Pagination State
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -71,7 +58,7 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [searchTerm, selectedCategory, selectedGrade, selectedWeightFilter, inStockOnly, maxPriceFilter, sortBy]);
+  }, [searchTerm, selectedCategory, selectedGrade, sortBy]);
 
   const categoryNames = useMemo(() => {
     const set = new Set<string>();
@@ -87,39 +74,21 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
       const matchesGrade =
         selectedGrade === 'All' || p.grade.toLowerCase() === selectedGrade.toLowerCase();
 
-      const matchesWeight =
-        selectedWeightFilter === 'All' || p.weights.includes(selectedWeightFilter as CashewWeight);
-
-      const matchesStock = !inStockOnly || (p.inStock && p.stockQuantity > 0);
-
-      const matchesPrice = p.price <= maxPriceFilter;
-
       const matchesSearch =
         !searchTerm ||
         p.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        p.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.grade.toLowerCase().includes(searchTerm.toLowerCase()) ||
         p.sku.toLowerCase().includes(searchTerm.toLowerCase());
 
-      return matchesCategory && matchesGrade && matchesWeight && matchesStock && matchesPrice && matchesSearch;
+      return matchesCategory && matchesGrade && matchesSearch;
     });
-  }, [
-    products,
-    selectedCategory,
-    selectedGrade,
-    selectedWeightFilter,
-    inStockOnly,
-    maxPriceFilter,
-    searchTerm,
-  ]);
+  }, [products, selectedCategory, selectedGrade, searchTerm]);
 
   const sortedProducts = useMemo(() => {
     const list = [...filteredProducts];
     if (sortBy === 'price-asc') return list.sort((a, b) => a.price - b.price);
     if (sortBy === 'price-desc') return list.sort((a, b) => b.price - a.price);
     if (sortBy === 'rating') return list.sort((a, b) => b.rating - a.rating);
-    if (sortBy === 'stock') return list.sort((a, b) => b.stockQuantity - a.stockQuantity);
-    if (sortBy === 'name-asc') return list.sort((a, b) => a.name.localeCompare(b.name));
     return list.sort((a, b) => (b.isFeatured ? 1 : 0) - (a.isFeatured ? 1 : 0));
   }, [filteredProducts, sortBy]);
 
@@ -146,9 +115,6 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
     setSearchTerm('');
     setSelectedCategory('All');
     setSelectedGrade('All');
-    setSelectedWeightFilter('All');
-    setInStockOnly(false);
-    setMaxPriceFilter(3000);
     setSortBy('featured');
     setCurrentPage(1);
   };
@@ -159,49 +125,40 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -15 }}
       transition={{ duration: 0.3 }}
-      className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-10 text-[#F8F9FA] overflow-x-hidden w-full"
+      className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8 py-4 sm:py-10 text-[#F8F9FA] overflow-x-hidden w-full"
     >
       {/* Header Banner */}
-      <div className="text-center max-w-3xl mx-auto mb-6 sm:mb-10 space-y-2">
+      <div className="text-center max-w-2xl mx-auto mb-4 sm:mb-8 space-y-1">
         <SquareBadge variant="gold">Hyderabad Hub Reserve Catalog 🥜</SquareBadge>
-        <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#F8F9FA]">
+        <h1 className="font-serif text-xl sm:text-4xl font-extrabold text-[#F8F9FA]">
           Royal Cashew Collection
         </h1>
-        <p className="text-xs sm:text-sm text-gray-300">
-          Hand-picked W-180 King Kernels, Ghee-Roasted Gourmet Flavors, and Bespoke Velvet Gift Hampers harvested directly for Kukatpally, Hyderabad.
+        <p className="text-xs text-gray-300">
+          Hand-picked W-180 King Kernels, Ghee-Roasted Gourmet Flavors & Velvet Gift Hampers.
         </p>
       </div>
 
       {/* Main Controls Section */}
-      <div className="border border-[#D4AF37]/30 bg-[#0B132B] p-3 sm:p-6 mb-6 space-y-4 shadow-xl">
-        {/* Row 1: Search & Sort & View Toggle */}
-        <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3 pb-3 border-b border-[#D4AF37]/20">
-          {/* Realtime Search Bar */}
+      <div className="border border-[#D4AF37]/30 bg-[#0B132B] p-2.5 sm:p-5 mb-5 space-y-3 shadow-lg">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pb-2.5 border-b border-[#D4AF37]/20">
+          {/* Search Bar */}
           <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#D4AF37]" />
+            <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[#D4AF37]" />
             <input
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="Search grade (W180), SKU, title..."
-              className="w-full bg-[#1C2541] border border-[#D4AF37]/40 pl-9 pr-8 py-2 text-xs text-[#F8F9FA] placeholder-gray-400 focus:outline-none focus:border-[#D4AF37]"
+              className="w-full bg-[#1C2541] border border-[#D4AF37]/40 pl-8 pr-7 py-1.5 text-xs text-[#F8F9FA] placeholder-gray-400 focus:outline-none focus:border-[#D4AF37]"
             />
-            {searchTerm && (
-              <button
-                onClick={() => setSearchTerm('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-gray-400 hover:text-white"
-              >
-                ✕
-              </button>
-            )}
           </div>
 
           {/* Sort Dropdown */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <select
               value={sortBy}
               onChange={(e: any) => setSortBy(e.target.value)}
-              className="w-full bg-[#1C2541] border border-[#D4AF37]/40 px-2.5 py-2 text-xs text-[#F8F9FA] focus:outline-none"
+              className="w-full bg-[#1C2541] border border-[#D4AF37]/40 px-2 py-1.5 text-xs text-[#F8F9FA] focus:outline-none"
             >
               <option value="featured">Featured First</option>
               <option value="price-asc">Price: Low to High</option>
@@ -211,7 +168,7 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
 
             <button
               onClick={resetAllFilters}
-              className="p-2 border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0B132B] transition-colors text-xs shrink-0"
+              className="p-1.5 border border-[#D4AF37]/40 text-[#D4AF37] hover:bg-[#D4AF37] hover:text-[#0B132B] transition-colors text-xs shrink-0"
               title="Reset Filters"
             >
               <RefreshCw className="w-3.5 h-3.5" />
@@ -219,17 +176,17 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
           </div>
         </div>
 
-        {/* Row 2: Category Tabs */}
+        {/* Category Tabs */}
         <div>
-          <span className="text-[10px] font-bold uppercase tracking-widest text-[#D4AF37] block mb-1.5 flex items-center gap-1">
+          <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4AF37] block mb-1 flex items-center gap-1">
             <Filter className="w-3 h-3" /> Categories:
           </span>
-          <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1">
             {categoryNames.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`py-1 px-2.5 border text-[11px] font-semibold uppercase tracking-wider transition-all cursor-pointer ${
+                className={`py-0.5 px-2 border text-[10px] font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                   selectedCategory === cat
                     ? 'bg-[#D4AF37] text-[#0B132B] border-[#D4AF37] font-bold'
                     : 'bg-[#1C2541]/60 text-gray-300 border-[#D4AF37]/20 hover:border-[#D4AF37]'
@@ -242,10 +199,10 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
         </div>
       </div>
 
-      {/* Catalog Display */}
+      {/* Catalog Grid */}
       {sortedProducts.length === 0 ? (
-        <div className="text-center py-16 border border-dashed border-[#D4AF37]/30 bg-[#0B132B] p-6 space-y-3">
-          <p className="text-sm font-serif text-[#F3E5AB]">
+        <div className="text-center py-12 border border-dashed border-[#D4AF37]/30 bg-[#0B132B] p-4 space-y-2">
+          <p className="text-xs font-serif text-[#F3E5AB]">
             No Cashew products found matching your filter criteria.
           </p>
           <SquareButton variant="gold" size="sm" onClick={resetAllFilters}>
@@ -253,35 +210,35 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
           </SquareButton>
         </div>
       ) : (
-        /* GRID VIEW */
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        /* ULTRA-COMPACT MOBILE GRID (2 Cols on Mobile) */
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6">
           {paginatedProducts.map((product) => {
             const currentWeight = selectedWeights[product.id] || product.weights[0] || '500g';
             const isAdded = addedMap[product.id];
 
             return (
-              <SquareCard
+              <div
                 key={product.id}
-                glowOnHover
-                className="flex flex-col justify-between h-full bg-[#0B132B] cursor-pointer p-3 sm:p-4"
                 onClick={() => onSelectProduct(product)}
+                className="flex flex-col justify-between bg-[#0B132B] border border-[#D4AF37]/30 hover:border-[#D4AF37] p-2 sm:p-3.5 transition-all shadow-md cursor-pointer group"
               >
                 <div>
-                  {/* Top Badges */}
-                  <div className="flex items-center justify-between mb-2">
-                    <SquareBadge variant="navy">{product.grade}</SquareBadge>
-                    <span className="text-[9px] font-bold text-emerald-400 uppercase tracking-widest">
+                  {/* Top Grade Badge */}
+                  <div className="flex items-center justify-between gap-1 mb-1.5">
+                    <span className="text-[8px] sm:text-xs font-bold px-1 py-0.5 bg-[#1C2541] text-[#D4AF37] border border-[#D4AF37]/30">
+                      {product.grade}
+                    </span>
+                    <span className="text-[8px] font-bold text-emerald-400 uppercase">
                       In Stock
                     </span>
                   </div>
 
-                  {/* Image Container */}
-                  <div className="relative mb-3 group overflow-hidden border border-[#D4AF37]/30 bg-[#1C2541]">
-                    <OptimizedImage
+                  {/* Image Aspect 4/3 */}
+                  <div className="relative mb-1.5 overflow-hidden border border-[#D4AF37]/20 bg-[#1C2541] aspect-[4/3]">
+                    <img
                       src={product.images[0]}
                       alt={product.name}
-                      aspectRatio="square"
-                      className="group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
 
@@ -289,30 +246,27 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
                   <div className="flex items-center gap-1 mb-1">
                     <div className="flex text-[#D4AF37]">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3 h-3 fill-current" />
+                        <Star key={i} className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" />
                       ))}
                     </div>
-                    <span className="text-[10px] font-semibold text-[#F3E5AB]">
-                      {product.rating} ({product.reviewCount})
+                    <span className="text-[9px] sm:text-[11px] font-semibold text-[#F3E5AB]">
+                      {product.rating}
                     </span>
                   </div>
 
-                  {/* Title & Description */}
-                  <h3 className="font-serif font-bold text-sm sm:text-base text-[#F8F9FA] line-clamp-1 hover:text-[#D4AF37]">
+                  {/* Product Title */}
+                  <h3 className="font-serif font-bold text-xs sm:text-base text-[#F8F9FA] line-clamp-1 hover:text-[#D4AF37]">
                     {product.name}
                   </h3>
-                  <p className="text-[11px] text-gray-400 mt-1 line-clamp-2 leading-relaxed">
-                    {product.description}
-                  </p>
 
-                  {/* Weight Options Selector */}
-                  <div className="mt-3 pt-2 border-t border-[#D4AF37]/20">
-                    <div className="flex gap-1 flex-wrap">
-                      {product.weights.map((w) => (
+                  {/* Compact Weight Selector */}
+                  <div className="mt-1.5 pt-1.5 border-t border-[#D4AF37]/20">
+                    <div className="flex gap-1">
+                      {product.weights.slice(0, 3).map((w) => (
                         <button
                           key={w}
                           onClick={(e) => handleWeightSelect(product.id, w, e)}
-                          className={`py-0.5 px-2 text-[9px] font-semibold border transition-all cursor-pointer ${
+                          className={`flex-1 py-0.5 text-[8px] sm:text-[10px] font-semibold border transition-all cursor-pointer ${
                             currentWeight === w
                               ? 'bg-[#D4AF37] text-[#0B132B] border-[#D4AF37]'
                               : 'bg-[#1C2541] text-gray-300 border-[#D4AF37]/30'
@@ -325,37 +279,32 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
                   </div>
                 </div>
 
-                {/* Price & Add to Cart */}
-                <div className="mt-4 pt-3 border-t border-[#D4AF37]/30 flex items-center justify-between gap-2">
-                  <div>
-                    {product.compareAtPrice && (
-                      <span className="text-[10px] text-gray-400 block line-through">
-                        {formatPrice(product.compareAtPrice)}
-                      </span>
-                    )}
-                    <span className="text-base font-bold font-serif gold-gradient-text">
-                      {formatPrice(product.price)}
-                    </span>
-                  </div>
+                {/* Price & Add Button Inline */}
+                <div className="mt-2 pt-1.5 border-t border-[#D4AF37]/30 flex items-center justify-between gap-1">
+                  <span className="text-xs sm:text-base font-bold font-serif gold-gradient-text">
+                    {formatPrice(product.price)}
+                  </span>
 
-                  <SquareButton
-                    variant={isAdded ? 'navy' : 'gold'}
-                    size="sm"
+                  <button
                     onClick={(e) => handleAdd(product, e)}
-                    className="shrink-0 text-xs py-1.5 px-2.5"
+                    className={`py-1 px-2 text-[9px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-all cursor-pointer shrink-0 ${
+                      isAdded
+                        ? 'bg-emerald-600 text-white'
+                        : 'bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#AA7C11] text-[#0B132B] hover:opacity-90'
+                    }`}
                   >
                     {isAdded ? (
                       <>
-                        <Check className="w-3.5 h-3.5 text-emerald-400" /> Added
+                        <Check className="w-3 h-3" /> Added
                       </>
                     ) : (
                       <>
-                        <ShoppingBag className="w-3.5 h-3.5" /> Add
+                        <ShoppingBag className="w-3 h-3" /> Add
                       </>
                     )}
-                  </SquareButton>
+                  </button>
                 </div>
-              </SquareCard>
+              </div>
             );
           })}
         </div>
@@ -363,20 +312,20 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
 
       {/* Pagination Controls */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-2 mt-8 pt-4 border-t border-[#D4AF37]/30">
+        <div className="flex items-center justify-center gap-1.5 mt-6 pt-3 border-t border-[#D4AF37]/30">
           <button
             disabled={currentPage === 1}
             onClick={() => setCurrentPage((p) => Math.max(p - 1, 1))}
-            className="p-1.5 border border-[#D4AF37]/40 text-[#D4AF37] disabled:opacity-30 hover:bg-[#D4AF37] hover:text-[#0B132B]"
+            className="p-1 border border-[#D4AF37]/40 text-[#D4AF37] disabled:opacity-30 hover:bg-[#D4AF37] hover:text-[#0B132B]"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="w-3.5 h-3.5" />
           </button>
 
           {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
             <button
               key={page}
               onClick={() => setCurrentPage(page)}
-              className={`w-8 h-8 border text-xs font-bold ${
+              className={`w-7 h-7 border text-[11px] font-bold ${
                 currentPage === page
                   ? 'bg-[#D4AF37] text-[#0B132B] border-[#D4AF37]'
                   : 'bg-[#1C2541]/60 text-gray-300 border-[#D4AF37]/30'
@@ -389,9 +338,9 @@ export const ProductsView: React.FC<ProductsViewProps> = ({
           <button
             disabled={currentPage === totalPages}
             onClick={() => setCurrentPage((p) => Math.min(p + 1, totalPages))}
-            className="p-1.5 border border-[#D4AF37]/40 text-[#D4AF37] disabled:opacity-30 hover:bg-[#D4AF37] hover:text-[#0B132B]"
+            className="p-1 border border-[#D4AF37]/40 text-[#D4AF37] disabled:opacity-30 hover:bg-[#D4AF37] hover:text-[#0B132B]"
           >
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="w-3.5 h-3.5" />
           </button>
         </div>
       )}

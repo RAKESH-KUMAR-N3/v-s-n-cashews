@@ -29,13 +29,17 @@ interface RequestQuoteModalProps {
 
 const AVAILABLE_GRADES = [
   { name: 'Royal King Jumbo Whole (W-180)', grade: 'W-180 Jumbo' },
-  { name: 'Sovereign Super Whole (W-240)', grade: 'W-240 Super' },
-  { name: 'Mangalore Choice Whole (W-320)', grade: 'W-320 Choice' },
-  { name: 'Export Grade Whole (W-400)', grade: 'W-400 Export' },
-  { name: 'Splits (JH / JK) Premium', grade: 'JH / JK Splits' },
-  { name: 'Large White Pieces (LWP) Industrial', grade: 'LWP Industrial' },
-  { name: 'Roasted Salted Cashews Bulk', grade: 'Roasted W-320' },
-  { name: 'Pepper & Herb Spiced Cashews Bulk', grade: 'Spiced Gourmet' },
+  { name: 'Royal Jumbo Whole (W-210)', grade: 'W-210 Jumbo' },
+  { name: 'Sovereign Large Whole (W-240)', grade: 'W-240 Large' },
+  { name: 'Rajahmundry Standard Whole (W-320)', grade: 'W-320 Standard' },
+  { name: 'Economy Small Whole (W-400)', grade: 'W-400 Economy' },
+  { name: 'JH Jumbo Cashew Halves (Jumbo Splits)', grade: 'JH Jumbo Halves' },
+  { name: 'Splits & Broken Pieces (LWP / SWP)', grade: 'Splits & Broken' },
+  { name: 'Ghee Roasted & Himalayan Salted Cashews', grade: 'Ghee Roasted' },
+  { name: 'California Jumbo Badam (Almonds)', grade: 'Badam (Almonds)' },
+  { name: 'Long Green Seedless Kishmish (Raisins)', grade: 'Kishmish (Raisins)' },
+  { name: 'Kashmiri Snow White Walnut Kernels', grade: 'Walnuts' },
+  { name: 'Iranian Roasted Salted Pistachios', grade: 'Pistachios' },
 ];
 
 export const RequestQuoteModal: React.FC<RequestQuoteModalProps> = ({
@@ -145,7 +149,7 @@ export const RequestQuoteModal: React.FC<RequestQuoteModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
+      <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -169,7 +173,7 @@ export const RequestQuoteModal: React.FC<RequestQuoteModalProps> = ({
               Request B2B Wholesale Quotation
             </h2>
             <p className="text-xs text-gray-300 mt-1">
-              Direct factory pricing from Mangalore Orchards for bulk cashew procurement & corporate gifting.
+              Direct factory pricing from Rajahmundry Orchards for bulk cashew procurement & corporate gifting.
             </p>
           </div>
 
@@ -186,7 +190,7 @@ export const RequestQuoteModal: React.FC<RequestQuoteModalProps> = ({
                 Quote Reference ID: {createdQuoteNumber}
               </p>
               <p className="text-xs text-gray-300 max-w-md mx-auto">
-                Our Mangalore Wholesale Desk will review your bulk volume specifications and generate a formal GST quote with custom volume pricing within 2 hours.
+                Our Rajahmundry Wholesale Desk will review your bulk volume specifications and generate a formal GST quote with custom volume pricing within 2 hours.
               </p>
 
               <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">

@@ -29,12 +29,20 @@ interface ProductFormModalProps {
 }
 
 const ALL_GRADES: CashewGrade[] = [
+  'JH',
   'W-180',
+  'W-210',
   'W-240',
   'W-320',
-  'Splits',
+  'W-400',
+  'Splits & Broken',
   'Gourmet Flavored',
-  'Royal Gift Box',
+  'Badam (Almonds)',
+  'Kishmish (Raisins)',
+  'Walnuts',
+  'Pistachios',
+  'Dates & Figs',
+  'Luxury Gift Hampers',
 ];
 
 const ALL_WEIGHTS: CashewWeight[] = ['250g', '500g', '1kg', '2kg Pack', '5kg Master Box'];
@@ -54,8 +62,8 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
   const [sku, setSku] = useState('');
   const [description, setDescription] = useState('');
   const [grade, setGrade] = useState<CashewGrade>('W-180');
-  const [category, setCategory] = useState<string>(categories[0] || 'King Grades');
-  const [origin, setOrigin] = useState('Baikampady Orchards, Mangalore, Karnataka');
+  const [category, setCategory] = useState<string>(categories[0] || 'Cashew Grades (JH, W180 - W400)');
+  const [origin, setOrigin] = useState('Rajahmundry, Andhra Pradesh');
   const [price, setPrice] = useState<number>(890);
   const [compareAtPrice, setCompareAtPrice] = useState<number | undefined>(1050);
   const [stockQuantity, setStockQuantity] = useState<number>(100);
@@ -126,7 +134,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
         productToEdit.seo || {
           metaTitle: `${productToEdit.name} | V S N CASHEWS`,
           metaDescription: productToEdit.description,
-          metaKeywords: `cashew, mangalore, ${productToEdit.grade}, ${productToEdit.category}`,
+          metaKeywords: `cashew, rajahmundry, andhra pradesh, ${productToEdit.grade}, ${productToEdit.category}`,
           canonicalUrl: `https://vsncashews.com/products/${productToEdit.slug}`,
         }
       );
@@ -141,7 +149,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
       setDescription('');
       setGrade('W-180');
       setCategory(categories[0] || 'King Grades');
-      setOrigin('Baikampady Orchards, Mangalore, Karnataka');
+      setOrigin('Morampudi Junction, Rajahmundry, Andhra Pradesh');
       setPrice(890);
       setCompareAtPrice(1050);
       setStockQuantity(100);
@@ -280,7 +288,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
       seo: {
         metaTitle: seo.metaTitle || `${name} | V S N CASHEWS`,
         metaDescription: seo.metaDescription || description.slice(0, 160),
-        metaKeywords: seo.metaKeywords || `cashew, mangalore, ${grade}, ${category}`,
+        metaKeywords: seo.metaKeywords || `cashew, rajahmundry, andhra pradesh, ${grade}, ${category}`,
         canonicalUrl: seo.canonicalUrl || `https://vsncashews.com/products/${finalSlug}`,
       },
     };
@@ -296,7 +304,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
         <div className="flex items-center justify-between pb-3 border-b border-[#D4AF37]/30">
           <div>
             <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4AF37]">
-              Mangalore Product Management
+              Rajahmundry Product Management
             </span>
             <h2 className="font-serif text-lg sm:text-2xl font-bold text-[#F3E5AB]">
               {productToEdit ? `Edit Product: ${productToEdit.name}` : 'Add New Product to Catalog'}
@@ -479,7 +487,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
                 <SquareInput
                   value={origin}
                   onChange={(e) => setOrigin(e.target.value)}
-                  placeholder="e.g. Baikampady Orchards, Mangalore, Karnataka"
+                  placeholder="e.g. Morampudi Junction, Rajahmundry, Andhra Pradesh"
                 />
               </div>
 
@@ -749,7 +757,7 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
                     Meta Keywords
                   </label>
                   <SquareInput
-                    placeholder="cashew, mangalore, w180, dry fruits, buy cashew online"
+                    placeholder="cashew, rajahmundry, w180, dry fruits, buy cashew online"
                     value={seo.metaKeywords || ''}
                     onChange={(e) => setSeo({ ...seo, metaKeywords: e.target.value })}
                   />

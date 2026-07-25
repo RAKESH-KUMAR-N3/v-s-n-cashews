@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, Phone, Mail, ChevronRight, Sparkles, User, Crown, Package, Building2, FileText, LogIn, UserPlus } from 'lucide-react';
+import { X, Phone, Mail, ChevronRight, Sparkles, User, Crown, Package, Building2, FileText, LogIn, UserPlus, Bell } from 'lucide-react';
 import { SITE_CONFIG, ActiveView } from '@/config/site';
 import { SquareButton } from '@/components/ui/SquareButton';
 import { VsnLogo } from '@/components/ui/VsnLogo';
@@ -32,7 +32,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 lg:hidden flex">
+    <div className="fixed inset-0 z-[200] lg:hidden flex">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/80 backdrop-blur-sm animate-fade-in"
@@ -119,6 +119,17 @@ export const MobileNav: React.FC<MobileNavProps> = ({
           {/* Quick Shortcuts */}
           <div className="pt-2 space-y-2 border-t border-[#D4AF37]/20">
             <button
+              onClick={() => handleLinkClick('notifications')}
+              className="w-full flex items-center justify-between p-2.5 border border-[#D4AF37]/30 bg-[#0B132B] text-[#F3E5AB] text-xs font-bold uppercase tracking-wider cursor-pointer text-left"
+            >
+              <div className="flex items-center gap-2">
+                <Bell className="w-4 h-4 text-[#D4AF37]" />
+                <span>Notifications & Updates</span>
+              </div>
+              <ChevronRight className="w-4 h-4 text-[#D4AF37]" />
+            </button>
+
+            <button
               onClick={() => handleLinkClick('orders')}
               className="w-full flex items-center justify-between p-2.5 border border-[#D4AF37]/30 bg-[#0B132B] text-[#F3E5AB] text-xs font-bold uppercase tracking-wider cursor-pointer text-left"
             >
@@ -157,7 +168,7 @@ export const MobileNav: React.FC<MobileNavProps> = ({
         <div className="pt-4 border-t border-[#D4AF37]/30 space-y-3 mt-4">
           <div className="flex items-center gap-2 text-[11px] text-[#F3E5AB]">
             <Sparkles className="w-3.5 h-3.5 text-[#D4AF37]" />
-            <span>Direct Mangalore Harvest</span>
+            <span>Direct Rajahmundry Harvest</span>
           </div>
           <div className="text-[11px] text-gray-400 space-y-1">
             <div className="flex items-center gap-2">

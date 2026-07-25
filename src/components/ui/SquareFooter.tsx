@@ -68,7 +68,7 @@ export const SquareFooter: React.FC = () => {
             </span>
           </div>
           <p className="text-xs text-gray-300 leading-relaxed font-sans">
-            Crafting India’s finest export-grade roasted, salted, and raw jumbo cashews since 1998. Straight from Panruti and Mangalore processing plants to your doorstep.
+            Crafting India’s finest export-grade roasted, salted, and raw jumbo cashews. Straight from our Rajahmundry processing plant, Godavari Delta, Andhra Pradesh to your doorstep.
           </p>
           <div className="text-[11px] font-mono text-[#D4AF37]">GSTIN: 33AAAAA0000A1Z5</div>
         </div>

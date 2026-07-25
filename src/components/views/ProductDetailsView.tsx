@@ -70,7 +70,7 @@ export const ProductDetailsView: React.FC<ProductDetailsViewProps> = ({
     }
 
     return () => {
-      document.title = 'V S N CASHEWS | Sovereign Grade Mangalore Cashew Nuts';
+      document.title = 'V S N CASHEWS | Sovereign Grade Rajahmundry Cashew Nuts';
     };
   }, [product]);
 
@@ -153,7 +153,7 @@ export const ProductDetailsView: React.FC<ProductDetailsViewProps> = ({
             />
             {product.isBestSeller && (
               <div className="absolute top-4 left-4 z-10">
-                <SquareBadge variant="gold">Mangalore Best Seller</SquareBadge>
+                <SquareBadge variant="gold">Rajahmundry Best Seller</SquareBadge>
               </div>
             )}
           </div>
@@ -183,7 +183,7 @@ export const ProductDetailsView: React.FC<ProductDetailsViewProps> = ({
               <ShieldCheck className="w-4 h-4" /> 7-Stage Nitrogen Vacuum Freshness Lock
             </div>
             <p className="text-gray-400 text-[11px] leading-relaxed">
-              Every pack is sealed within 48 hours of shelling in our Mangalore processing estate, locking in uncompromised crisp crunch for up to 12 months.
+              Every pack is sealed within 48 hours of shelling in our Rajahmundry processing estate, locking in uncompromised crisp crunch for up to 12 months.
             </p>
           </div>
         </div>
@@ -370,7 +370,7 @@ export const ProductDetailsView: React.FC<ProductDetailsViewProps> = ({
           <div>
             <SquareBadge variant="gold">Orchard Pairing</SquareBadge>
             <h2 className="font-serif text-2xl font-bold text-[#F8F9FA] mt-1">
-              Complementary Mangalore Grades
+              Complementary Rajahmundry Grades
             </h2>
           </div>
           <button

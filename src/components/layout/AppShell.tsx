@@ -7,7 +7,6 @@ import { Footer } from '@/components/layout/Footer';
 import { BottomMobileNav } from '@/components/layout/BottomMobileNav';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { AuthModal } from '@/components/auth/AuthModal';
-import { PwaInstallPrompt } from '@/components/pwa/PwaInstallPrompt';
 import { MobileSplashScreen } from '@/components/splash/MobileSplashScreen';
 import { useCart } from '@/context/CartContext';
 import { ActiveView } from '@/config/site';
@@ -87,7 +86,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const isAdminPage = pathname === '/admin' || pathname?.startsWith('/admin');
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B132B] text-[#F8F9FA] selection:bg-[#D4AF37] selection:text-[#0B132B] pb-20 lg:pb-0 max-w-[100vw] overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-[#0B132B] text-[#F8F9FA] selection:bg-[#D4AF37] selection:text-[#0B132B] pb-20 lg:pb-0 w-full overflow-x-clip">
       {/* Mobile Animated Splash Screen Overlay */}
       {showSplash && <MobileSplashScreen onContinue={handleSplashContinue} />}
 
@@ -129,9 +128,6 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
         onClose={() => setIsAuthModalOpen(false)}
         onNavigateToCheckout={() => handleNavigate('checkout')}
       />
-
-      {/* PWA Prompt */}
-      <PwaInstallPrompt />
 
       {/* Footer (Hidden on Admin pages) */}
       {!isAdminPage && <Footer onNavigate={handleNavigate} />}

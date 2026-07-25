@@ -32,7 +32,7 @@ const STEPS = [
   {
     key: 'CONFIRMED',
     title: 'Order Confirmed',
-    description: 'Payment verified & sent to Mangalore Orchard Facility',
+    description: 'Payment verified & sent to Rajahmundry Orchard Facility',
     icon: CheckCircle2,
   },
   {
@@ -173,7 +173,7 @@ export const OrderTrackingTimeline: React.FC<OrderTrackingTimelineProps> = ({
       <div className="pt-3 border-t border-[#D4AF37]/20 flex items-center justify-between text-xs text-gray-300">
         <span className="flex items-center gap-1.5">
           <Sparkles className="w-4 h-4 text-[#D4AF37]" />
-          Dispatched directly from Mangalore Baikampady Estate
+          Dispatched directly from Rajahmundry Morampudi Estate
         </span>
         <span className="text-[#F3E5AB] font-bold">
           Est. Delivery: {estimatedDelivery}

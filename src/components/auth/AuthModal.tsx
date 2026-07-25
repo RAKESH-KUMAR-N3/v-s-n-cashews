@@ -336,9 +336,10 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onNavigat
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-8.5 text-gray-400 hover:text-[#D4AF37]"
+                      className="absolute right-3 top-[34px] text-gray-400 hover:text-[#D4AF37] p-1 cursor-pointer z-10"
+                      title={showPassword ? 'Hide Password' : 'Show Password'}
                     >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      {showPassword ? <EyeOff className="w-4 h-4 text-[#D4AF37]" /> : <Eye className="w-4 h-4 text-gray-400" />}
                     </button>
                   </div>
 

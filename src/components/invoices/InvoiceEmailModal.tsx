@@ -44,7 +44,7 @@ export const InvoiceEmailModal: React.FC<InvoiceEmailModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm p-4 flex items-center justify-center">
+    <div className="fixed inset-0 z-[200] bg-black/80 backdrop-blur-sm p-4 flex items-center justify-center">
       <div className="bg-[#0B132B] border border-[#D4AF37] w-full max-w-lg p-6 shadow-2xl relative text-gray-100">
         <button
           onClick={onClose}

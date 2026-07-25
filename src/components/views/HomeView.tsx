@@ -3,9 +3,9 @@
 import React from 'react';
 import { motion } from 'motion/react';
 import { HeroBanner } from '@/components/home/HeroBanner';
-import { CategoryGrid } from '@/components/home/CategoryGrid';
+import { AboutBriefSection } from '@/components/home/AboutBriefSection';
 import { FeaturedProducts } from '@/components/home/FeaturedProducts';
-import { BrandTrust } from '@/components/home/BrandTrust';
+import { CtaBanner } from '@/components/home/CtaBanner';
 import { Product, CashewWeight } from '@/types';
 import { ActiveView } from '@/config/site';
 
@@ -31,14 +31,21 @@ export const HomeView: React.FC<HomeViewProps> = ({
       exit={{ opacity: 0 }}
       transition={{ duration: 0.3 }}
     >
+      {/* 1. Hero Banner */}
       <HeroBanner onNavigate={onNavigate} />
-      <CategoryGrid onSelectCategory={onSelectCategory} />
+
+      {/* 2. Brief About Us Section (Why VSN Cashews - Heritage of Rajahmundry) */}
+      <AboutBriefSection onNavigate={onNavigate} />
+
+      {/* 3. Best Seller Products Catalog Section */}
       <FeaturedProducts
         onAddToCart={onAddToCart}
         onSelectProduct={onSelectProduct}
         searchTerm={searchTerm}
       />
-      <BrandTrust />
+
+      {/* 4. Bottom Wholesale CTA Banner */}
+      <CtaBanner onNavigate={onNavigate} />
     </motion.div>
   );
 };

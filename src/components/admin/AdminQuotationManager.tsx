@@ -560,13 +560,13 @@ export const AdminQuotationManager: React.FC = () => {
             <div className="bg-white text-gray-900 p-4 rounded text-xs space-y-3 font-sans max-h-[60vh] overflow-y-auto">
               <div className="border-b pb-2">
                 <div><strong>To:</strong> {emailModalQuote.email}</div>
-                <div><strong>Subject:</strong> Formal B2B Cashew Quotation {emailModalQuote.quoteNumber} - V S N CASHEWS Mangalore</div>
+                <div><strong>Subject:</strong> Formal B2B Cashew Quotation {emailModalQuote.quoteNumber} - V S N CASHEWS Rajahmundry</div>
               </div>
 
               <div className="space-y-2">
                 <p>Dear {emailModalQuote.contactPerson},</p>
                 <p>
-                  Thank you for inquiring with V S N CASHEWS Mangalore. We are pleased to issue formal quotation <strong>{emailModalQuote.quoteNumber}</strong> for {emailModalQuote.companyName}.
+                  Thank you for inquiring with V S N CASHEWS Rajahmundry. We are pleased to issue formal quotation <strong>{emailModalQuote.quoteNumber}</strong> for {emailModalQuote.companyName}.
                 </p>
 
                 <div className="bg-gray-50 p-2 border text-[11px] font-mono">

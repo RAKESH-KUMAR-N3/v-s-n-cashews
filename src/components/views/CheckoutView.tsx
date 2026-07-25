@@ -33,6 +33,7 @@ import {
 } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import { useOrders } from '@/context/OrderContext';
+import { useNotification } from '@/context/NotificationContext';
 import {
   Address,
   AddressLabel,
@@ -72,6 +73,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
     clearCart,
   } = useCart();
   const { addOrder } = useOrders();
+  const { addNotification } = useNotification();
 
   // Address Book State
   const [savedAddresses, setSavedAddresses] = useState<Address[]>(SAVED_ADDRESSES);
@@ -259,7 +261,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
 
     setIsSubmitting(true);
 
-    // Simulate backend payment gateway handoff & Mangalore estate dispatch registration
+    // Simulate backend payment gateway handoff & Rajahmundry estate dispatch registration
     setTimeout(() => {
       const orderNum = `VSN-ORD-${Math.floor(100000 + Math.random() * 900000)}`;
       const estDate = new Date();
@@ -302,6 +304,25 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
       };
 
       addOrder(newOrder);
+
+      // Trigger Admin Notification
+      addNotification({
+        recipient: 'ADMIN',
+        title: `New Order: #${newOrder.orderNumber}`,
+        message: `Order for ₹${newOrder.grandTotal} placed by ${newOrder.shippingAddress.fullName} (${newOrder.paymentMethod}).`,
+        type: 'order',
+        linkView: 'admin',
+      });
+
+      // Trigger User Notification
+      addNotification({
+        recipient: 'USER',
+        title: `Order Placed: #${newOrder.orderNumber}`,
+        message: `Your cashew order for ₹${newOrder.grandTotal} is confirmed! Estimated Delivery: ${newOrder.estimatedDelivery}.`,
+        type: 'order',
+        linkView: 'orders',
+      });
+
       setCompletedOrder(newOrder);
       setIsSubmitting(false);
       clearCart();
@@ -337,7 +358,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
           </p>
           <div className="flex items-center justify-center gap-2 mt-2">
             <SquareBadge variant="gold" className="text-xs">
-              Direct Mangalore Orchard Dispatch
+              Direct Rajahmundry Orchard Dispatch
             </SquareBadge>
             <SquareBadge variant="success" className="text-xs">
               {completedOrder.paymentStatus === 'PAID' ? 'Payment Verified ✓' : 'Pay on Delivery'}
@@ -354,13 +375,13 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
                 V S N CASHEWS
               </h2>
               <p className="text-xs text-gray-300">
-                Sovereign Mangalore Cashews & Gourmet Dry Fruits
+                Sovereign Rajahmundry Cashews & Gourmet Dry Fruits
               </p>
               <p className="text-[11px] text-gray-400 mt-1">
-                FSSAI Lic. No: 11218333000123 • GSTIN: 29AAAAA0000A1Z5
+                FSSAI Lic. No: 11218333000123 • GSTIN: 37AAAAA0000A1Z5
               </p>
               <p className="text-[10px] text-gray-400">
-                Baikampady Industrial Estate, Mangalore, Karnataka 575011
+                Morampudi Junction, Rajahmundry, Andhra Pradesh 533107
               </p>
             </div>
             <div className="text-left sm:text-right border-l-2 sm:border-l-0 sm:border-r-2 border-[#D4AF37] pl-3 sm:pl-0 sm:pr-3">
@@ -458,7 +479,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
           <div className="flex flex-col sm:flex-row justify-between items-start pt-4 border-t border-[#D4AF37]/40 gap-4">
             <div className="text-[11px] text-gray-400 max-w-xs space-y-1 bg-[#0B132B] p-3 border border-[#D4AF37]/20">
               <p className="font-bold text-[#F3E5AB] flex items-center gap-1">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" /> Mangalore Freshness Assurance
+                <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" /> Rajahmundry Freshness Assurance
               </p>
               <p>
                 Each pouch is vacuum-sealed with food-grade nitrogen flush to guarantee fresh orchard taste. Keep in a cool, dry place.
@@ -972,7 +993,7 @@ export const CheckoutView: React.FC<CheckoutViewProps> = ({
                 <div className="p-3 bg-[#1C2541] border border-[#D4AF37]/30 text-xs text-gray-200 space-y-1 font-mono">
                   <p className="font-bold text-[#F3E5AB]">Bank Transfer (NEFT / RTGS) Account:</p>
                   <p>Account Name: V S N CASHEWS PRIVATE LIMITED</p>
-                  <p>Bank Name: HDFC Bank, Mangalore Main Branch</p>
+                  <p>Bank Name: HDFC Bank, Rajahmundry Main Branch</p>
                   <p>A/C Number: 50200088991234</p>
                   <p>IFSC Code: HDFC0000123</p>
                 </div>

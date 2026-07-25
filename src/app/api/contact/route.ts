@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       success: true,
-      message: 'Thank you for reaching out to V S N CASHEWS. Our Mangalore estate desk will respond within 2 business hours.',
+      message: 'Thank you for reaching out to V S N CASHEWS. Our Rajahmundry estate desk will respond within 2 business hours.',
       referenceId: `VSN-INQ-${Date.now().toString(36).toUpperCase()}`,
     });
   } catch (error) {

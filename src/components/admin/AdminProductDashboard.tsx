@@ -148,7 +148,7 @@ export const AdminProductDashboard: React.FC<AdminProductDashboardProps> = ({
   return (
     <div className="w-full min-h-screen bg-[#0B132B] text-[#F8F9FA] p-3 sm:p-6 space-y-6 animate-fade-in pb-24 sm:pb-8">
       {/* Top Floating Header with Hamburger Button */}
-      <div className="flex items-center justify-between pb-3 border-b border-[#D4AF37]/30 bg-[#1C2541]/90 p-3 sm:p-4 backdrop-blur-md sticky top-16 z-30 shadow-xl">
+      <div className="flex items-center justify-between pb-3 border-b border-[#D4AF37]/30 bg-[#1C2541]/95 p-3 sm:p-4 backdrop-blur-md sticky top-0 z-30 shadow-xl">
         <div className="flex items-center gap-3">
           {/* Hamburger Trigger Button */}
           <button

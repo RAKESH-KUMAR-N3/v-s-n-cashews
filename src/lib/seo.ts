@@ -10,7 +10,7 @@ export interface SeoMetadata {
 
 export function generateSeoMetadata(override: Partial<SeoMetadata> = {}): SeoMetadata {
   return {
-    title: override.title ? `${override.title} | ${SITE_CONFIG.name}` : `${SITE_CONFIG.name} - Royal Mangalore Cashew Nuts & Dry Fruits`,
+    title: override.title ? `${override.title} | ${SITE_CONFIG.name}` : `${SITE_CONFIG.name} - Royal Rajahmundry Cashew Nuts & Dry Fruits`,
     description: override.description || SITE_CONFIG.description,
     canonical: override.canonical || SITE_CONFIG.url,
     ogImage: override.ogImage || `${SITE_CONFIG.url}/og-vsn-cashews.jpg`,
@@ -68,10 +68,10 @@ export function generateOrganizationJsonLd() {
     "priceRange": "₹₹ - ₹₹₹",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Industrial Area, Baikampady",
-      "addressLocality": "Mangalore",
-      "addressRegion": "Karnataka",
-      "postalCode": "575011",
+      "streetAddress": "Morampudi Junction",
+      "addressLocality": "Rajahmundry",
+      "addressRegion": "Andhra Pradesh",
+      "postalCode": "533107",
       "addressCountry": "IN"
     }
   };

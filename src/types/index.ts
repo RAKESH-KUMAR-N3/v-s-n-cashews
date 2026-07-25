@@ -1,4 +1,4 @@
-export type CashewGrade = 'W-180' | 'W-240' | 'W-320' | 'Splits' | 'Gourmet Flavored' | 'Royal Gift Box';
+export type CashewGrade = 'JH' | 'W-180' | 'W-210' | 'W-240' | 'W-320' | 'W-400' | 'Splits & Broken' | 'Gourmet Flavored' | 'Badam (Almonds)' | 'Kishmish (Raisins)' | 'Walnuts' | 'Pistachios' | 'Dates & Figs' | 'Luxury Gift Hampers';
 
 export type CashewWeight = '250g' | '500g' | '1kg' | '2kg Pack' | '5kg Master Box';
 
@@ -83,6 +83,7 @@ export interface CartUserProfile {
   id: string;
   name: string;
   email: string;
+  phone?: string;
   isRoyalMember: boolean;
   memberDiscountPercent: number;
   isAdmin?: boolean;
@@ -153,6 +154,8 @@ export interface Order {
   companyName?: string;
   status: 'PENDING' | 'CONFIRMED' | 'PACKED' | 'SHIPPED' | 'DELIVERED' | 'CANCELLED';
   paymentStatus: 'PENDING' | 'PAID' | 'FAILED';
+  trackingNumber?: string;
+  carrier?: string;
   createdAt: string;
   estimatedDelivery: string;
 }

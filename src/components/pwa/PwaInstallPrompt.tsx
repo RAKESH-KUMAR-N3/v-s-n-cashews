@@ -81,8 +81,8 @@ export const PwaInstallPrompt: React.FC = () => {
       {isVisible && (
         <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 z-40 max-w-sm bg-[#0B132B] border-2 border-[#D4AF37] p-4 text-[#F8F9FA] shadow-[0_0_25px_rgba(212,175,55,0.3)] animate-slide-up">
           <div className="flex items-start justify-between gap-3">
-            <div className="p-2 border border-[#D4AF37] bg-[#1C2541] text-[#D4AF37]">
-              {isIos ? <Smartphone className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
+            <div className="p-1.5 border border-[#D4AF37] bg-[#1C2541] flex items-center justify-center shrink-0">
+              <img src="/assets/kaju-icon.png" alt="VSN Cashews App Icon" className="w-7 h-7 object-contain" />
             </div>
             <div className="flex-1">
               <h4 className="text-xs font-serif font-bold tracking-wider text-[#F3E5AB]">
@@ -91,7 +91,7 @@ export const PwaInstallPrompt: React.FC = () => {
               <p className="text-[11px] text-gray-300 mt-1">
                 {isIos
                   ? 'Add to Home Screen for fast offline catalog browsing & one-tap wholesale orders.'
-                  : 'Install our royal Mangalore mobile app for offline access and direct shipment updates.'}
+                  : 'Install our royal Rajahmundry mobile app for offline access and direct shipment updates.'}
               </p>
             </div>
             <button

@@ -51,13 +51,13 @@ export const INITIAL_MOCK_QUOTES: Quotation[] = [
     email: 'procurement@coastalresorts.in',
     phone: '9880011223',
     gstin: '29BBBBB1111B1Z9',
-    city: 'Mangalore',
-    state: 'Karnataka',
-    pincode: '575001',
+    city: 'Rajahmundry',
+    state: 'Andhra Pradesh',
+    pincode: '533101',
     items: [
       {
         id: 'qti-3',
-        productName: 'Mangalore Pepper & Salt Roasted Cashews',
+        productName: 'Rajahmundry Pepper & Salt Roasted Cashews',
         grade: 'Roasted W-320',
         requestedQtyKg: 200,
       },

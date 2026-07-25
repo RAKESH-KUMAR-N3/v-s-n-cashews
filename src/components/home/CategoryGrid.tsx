@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { SquareCard } from '@/components/ui/SquareCard';
@@ -66,7 +68,7 @@ export const CategoryGrid: React.FC<CategoryGridProps> = ({ onSelectCategory }) 
               Sovereign Classification
             </span>
             <h2 className="font-serif text-3xl md:text-4xl font-bold text-[#F8F9FA] mt-1">
-              Explore Mangalore Cashew Grades
+              Explore Rajahmundry Cashew Grades
             </h2>
           </div>
           <p className="text-xs text-gray-400 max-w-md">

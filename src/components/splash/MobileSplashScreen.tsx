@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, Download, Share, CheckCircle2 } from 'lucide-react';
 import { BeforeInstallPromptEvent, setupPwaInstallListener, isStandalonePwa } from '@/lib/pwa';
+import { CashewNutParticle } from '@/components/ui/CashewNutParticle';
 
 interface MobileSplashScreenProps {
   onContinue: () => void;
@@ -29,6 +30,15 @@ export const MobileSplashScreen: React.FC<MobileSplashScreenProps> = ({ onContin
     if (isStandalonePwa()) {
       setInstalledSuccess(true);
     }
+
+    const handleAppInstalled = () => {
+      setInstalledSuccess(true);
+    };
+    window.addEventListener('appinstalled', handleAppInstalled);
+
+    return () => {
+      window.removeEventListener('appinstalled', handleAppInstalled);
+    };
   }, []);
 
   const handleInstallClick = async () => {
@@ -49,18 +59,18 @@ export const MobileSplashScreen: React.FC<MobileSplashScreenProps> = ({ onContin
     }
   };
 
-  // 10 background falling cashew particles configuration
+  // 10 background falling cashew particles configuration using the 3 kaju icons
   const fallingCashews = [
-    { id: 1, left: '6%', delay: 0, duration: 7, size: 'text-xs' },
-    { id: 2, left: '22%', delay: 1.5, duration: 8, size: 'text-sm' },
-    { id: 3, left: '42%', delay: 3, duration: 6.5, size: 'text-xs' },
-    { id: 4, left: '65%', delay: 0.8, duration: 9, size: 'text-sm' },
-    { id: 5, left: '85%', delay: 2.2, duration: 7.5, size: 'text-xs' },
-    { id: 6, left: '14%', delay: 4, duration: 8.5, size: 'text-xs' },
-    { id: 7, left: '34%', delay: 0.5, duration: 7.2, size: 'text-sm' },
-    { id: 8, left: '55%', delay: 3.5, duration: 9.5, size: 'text-xs' },
-    { id: 9, left: '78%', delay: 1.8, duration: 6.8, size: 'text-xs' },
-    { id: 10, left: '92%', delay: 4.5, duration: 8, size: 'text-sm' },
+    { id: 1, left: '6%', delay: 0, duration: 7, size: 24, variant: 0 },
+    { id: 2, left: '22%', delay: 1.5, duration: 8, size: 32, variant: 1 },
+    { id: 3, left: '42%', delay: 3, duration: 6.5, size: 28, variant: 2 },
+    { id: 4, left: '65%', delay: 0.8, duration: 9, size: 36, variant: 0 },
+    { id: 5, left: '85%', delay: 2.2, duration: 7.5, size: 30, variant: 1 },
+    { id: 6, left: '14%', delay: 4, duration: 8.5, size: 26, variant: 2 },
+    { id: 7, left: '34%', delay: 0.5, duration: 7.2, size: 32, variant: 0 },
+    { id: 8, left: '55%', delay: 3.5, duration: 9.5, size: 30, variant: 1 },
+    { id: 9, left: '78%', delay: 1.8, duration: 6.8, size: 24, variant: 2 },
+    { id: 10, left: '92%', delay: 4.5, duration: 8, size: 28, variant: 0 },
   ];
 
   return (
@@ -71,7 +81,7 @@ export const MobileSplashScreen: React.FC<MobileSplashScreenProps> = ({ onContin
       transition={{ duration: 0.4 }}
       className="fixed inset-0 z-[999999] bg-gradient-to-b from-[#060A17] via-[#0B132B] to-[#040711] text-[#F8F9FA] flex flex-col justify-between p-6 overflow-hidden max-w-[100vw]"
     >
-      {/* BACKGROUND FLOATING CASHEW PIECES FLOW ANIMATION */}
+      {/* BACKGROUND FLOATING REALISTIC GOLDEN CASHEW PIECES FLOW ANIMATION */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
         {fallingCashews.map((item) => (
           <motion.div
@@ -79,7 +89,7 @@ export const MobileSplashScreen: React.FC<MobileSplashScreenProps> = ({ onContin
             initial={{ y: -40, opacity: 0, rotate: 0 }}
             animate={{
               y: ['0vh', '105vh'],
-              opacity: [0, 0.4, 0.4, 0],
+              opacity: [0, 0.7, 0.7, 0],
               rotate: [0, 180, 360],
             }}
             transition={{
@@ -89,9 +99,9 @@ export const MobileSplashScreen: React.FC<MobileSplashScreenProps> = ({ onContin
               ease: 'linear',
             }}
             style={{ left: item.left }}
-            className={`absolute top-0 ${item.size} select-none opacity-40`}
+            className="absolute top-0 select-none opacity-60"
           >
-            🥜
+            <CashewNutParticle size={item.size} variant={item.variant} />
           </motion.div>
         ))}
       </div>
@@ -154,27 +164,20 @@ export const MobileSplashScreen: React.FC<MobileSplashScreenProps> = ({ onContin
           <ArrowRight className="w-4 h-4" />
         </motion.button>
 
-        {/* 2. INSTALL APP AS CLEAN ELEGANT TEXT LINK (Not a box card) */}
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={handleInstallClick}
-          className="py-1 px-3 text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:text-[#F3E5AB] transition-colors flex items-center justify-center gap-1.5 cursor-pointer bg-transparent border-none"
-        >
-          {installedSuccess ? (
-            <>
-              <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-              <span className="underline underline-offset-4">App Installed</span>
-            </>
-          ) : (
-            <>
-              <Download className="w-3.5 h-3.5 text-[#D4AF37] animate-bounce" />
-              <span className="underline underline-offset-4 decoration-[#D4AF37]/50 hover:decoration-[#F3E5AB]">
-                Install VSN Mobile App
-              </span>
-            </>
-          )}
-        </motion.button>
+        {/* 2. INSTALL APP LINK (Only shown if app is not yet installed) */}
+        {!installedSuccess && (
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={handleInstallClick}
+            className="py-1 px-3 text-xs font-bold uppercase tracking-wider text-[#D4AF37] hover:text-[#F3E5AB] transition-colors flex items-center justify-center gap-1.5 cursor-pointer bg-transparent border-none"
+          >
+            <Download className="w-3.5 h-3.5 text-[#D4AF37] animate-bounce" />
+            <span className="underline underline-offset-4 decoration-[#D4AF37]/50 hover:decoration-[#F3E5AB]">
+              Install VSN Mobile App
+            </span>
+          </motion.button>
+        )}
 
         {/* iOS Install Helper */}
         <AnimatePresence>

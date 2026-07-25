@@ -42,6 +42,12 @@ const CustomerQuotesView = lazy(() =>
 const CustomerInvoicesView = lazy(() =>
   import('@/components/invoices/CustomerInvoicesView').then((m) => ({ default: m.CustomerInvoicesView }))
 );
+const AccountView = lazy(() =>
+  import('@/components/views/AccountView').then((m) => ({ default: m.AccountView }))
+);
+const NotificationsView = lazy(() =>
+  import('@/components/views/NotificationsView').then((m) => ({ default: m.NotificationsView }))
+);
 
 // Smooth Suspense Fallback
 const ViewLoadingFallback = () => (
@@ -86,7 +92,7 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    let title = `${SITE_CONFIG.name} - Sovereign Grade Mangalore Cashews`;
+    let title = `${SITE_CONFIG.name} - Sovereign Grade Rajahmundry Cashews`;
     let desc = SITE_CONFIG.description;
 
     if (selectedProduct) {
@@ -112,12 +118,12 @@ export default function App() {
           desc = 'Explore our handpicked W-180 King Cashews, Ghee Roasted gourmet flavors, and Velvet Gift Hampers.';
           break;
         case 'about':
-          title = `Mangalore Heritage & 1988 Legacy | ${SITE_CONFIG.name}`;
+          title = `Rajahmundry Heritage & Legacy | ${SITE_CONFIG.name}`;
           desc = 'Discover our 38+ years of 7-stage hand-sorting, zero chemical bleaching, and nitrogen freshness lock processing.';
           break;
         case 'contact':
-          title = `Contact Mangalore Estate & Bulk Exports | ${SITE_CONFIG.name}`;
-          desc = 'Connect with our Mangalore office for retail express orders, corporate gifting, or container export inquiries.';
+          title = `Contact Rajahmundry Estate & Bulk Exports | ${SITE_CONFIG.name}`;
+          desc = 'Connect with our Rajahmundry office for retail express orders, corporate gifting, or container export inquiries.';
           break;
         case 'checkout':
           title = `Sovereign Express Checkout | ${SITE_CONFIG.name}`;
@@ -127,8 +133,12 @@ export default function App() {
           title = `Admin Operations & Inventory Portal | ${SITE_CONFIG.name}`;
           desc = 'Manage product catalog, inventory stock levels, category listings, and SEO parameters.';
           break;
+        case 'notifications':
+          title = `Notifications & Order Updates | ${SITE_CONFIG.name}`;
+          desc = 'View your recent order dispatches, payment confirmations, and wholesale quote notifications.';
+          break;
         default:
-          title = `${SITE_CONFIG.name} - Sovereign Grade Mangalore Cashew Nuts`;
+          title = `${SITE_CONFIG.name} - Sovereign Grade Rajahmundry Cashew Nuts`;
           desc = SITE_CONFIG.description;
       }
     }
@@ -303,6 +313,17 @@ export default function App() {
               <CustomerInvoicesView
                 key="view-invoices"
                 onBackToCatalog={() => handleNavigate('products')}
+              />
+            ) : activeView === 'account' ? (
+              <AccountView
+                key="view-account"
+                onNavigate={handleNavigate}
+                onOpenAuthModal={() => setIsAuthModalOpen(true)}
+              />
+            ) : activeView === 'notifications' ? (
+              <NotificationsView
+                key="view-notifications"
+                onNavigate={handleNavigate}
               />
             ) : (
               <HomeView

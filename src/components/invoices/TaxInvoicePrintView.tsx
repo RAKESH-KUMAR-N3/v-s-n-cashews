@@ -75,7 +75,7 @@ export const TaxInvoicePrintView: React.FC<TaxInvoicePrintViewProps> = ({
   const isInterstate = invoice.isInterstate;
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm p-2 sm:p-4 md:p-6 flex justify-center">
+    <div className="fixed inset-0 z-[200] overflow-y-auto bg-black/80 backdrop-blur-sm p-2 sm:p-4 md:p-6 flex justify-center">
       <div className="bg-[#0B132B] border border-[#D4AF37]/50 w-full max-w-4xl text-gray-100 flex flex-col my-auto shadow-2xl rounded-none">
         {/* Action Header bar (Hidden during printing) */}
         <div className="p-4 bg-[#1C2541] border-b border-[#D4AF37]/30 flex flex-wrap items-center justify-between gap-3 print:hidden">

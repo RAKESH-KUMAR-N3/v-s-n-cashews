@@ -102,7 +102,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, onProce
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end">
+    <div className="fixed inset-0 z-[200] flex justify-end">
       {/* Backdrop */}
       <div
         className="fixed inset-0 bg-black/80 backdrop-blur-sm animate-fade-in"
@@ -204,7 +204,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, onProce
               <span className="font-mono text-[#D4AF37] font-bold">{orderSuccessRef}</span>.
             </p>
             <p className="text-[11px] text-gray-400">
-              Our Mangalore estate team is preparing your vacuum-sealed nitrogen freshness pack for dispatch.
+              Our Rajahmundry estate team is preparing your vacuum-sealed nitrogen freshness pack for dispatch.
             </p>
             <SquareButton
               variant="gold"
@@ -502,7 +502,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, onProce
                     <span>{formatPrice(Math.round(gstAmount / 2))}</span>
                   </div>
                   <div className="text-[9px] text-[#D4AF37] pt-0.5">
-                    HSN Code: 08013100 (Sovereign Mangalore Processed Cashew Nuts)
+                    HSN Code: 08013100 (Sovereign Rajahmundry Processed Cashew Nuts)
                   </div>
                 </div>
               )}
@@ -553,7 +553,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = ({ isOpen, onClose, onProce
 
             <p className="text-[10px] text-gray-400 text-center flex items-center justify-center gap-1 pb-1">
               <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" />
-              Mangalore Estate Dispatch • Direct Factory Fresh Guarantee
+              Rajahmundry Estate Dispatch • Direct Factory Fresh Guarantee
             </p>
           </div>
         )}

@@ -24,12 +24,12 @@ export const InvoiceFormModal: React.FC<InvoiceFormModalProps> = ({
   const [email, setEmail] = useState(existingInvoice?.customerDetails.email || '');
   const [phone, setPhone] = useState(existingInvoice?.customerDetails.phone || '');
   const [address, setAddress] = useState(existingInvoice?.customerDetails.address || '');
-  const [city, setCity] = useState(existingInvoice?.customerDetails.city || 'Mangalore');
-  const [state, setState] = useState(existingInvoice?.customerDetails.state || 'Karnataka');
-  const [pincode, setPincode] = useState(existingInvoice?.customerDetails.pincode || '575001');
+  const [city, setCity] = useState(existingInvoice?.customerDetails.city || 'Rajahmundry');
+  const [state, setState] = useState(existingInvoice?.customerDetails.state || 'Andhra Pradesh');
+  const [pincode, setPincode] = useState(existingInvoice?.customerDetails.pincode || '533101');
 
   const [isInterstate, setIsInterstate] = useState<boolean>(
-    existingInvoice ? existingInvoice.isInterstate : state.toLowerCase() !== 'karnataka'
+    existingInvoice ? existingInvoice.isInterstate : state.toLowerCase() !== 'andhra pradesh'
   );
 
   const [items, setItems] = useState<
@@ -213,7 +213,7 @@ export const InvoiceFormModal: React.FC<InvoiceFormModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/80 backdrop-blur-sm p-3 sm:p-6 flex justify-center items-start">
+    <div className="fixed inset-0 z-[200] overflow-y-auto bg-black/80 backdrop-blur-sm p-3 sm:p-6 flex justify-center items-start">
       <div className="bg-[#0B132B] border border-[#D4AF37] w-full max-w-3xl my-auto text-gray-100 shadow-2xl relative">
         <div className="p-4 bg-[#1C2541] border-b border-[#D4AF37]/30 flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -258,7 +258,7 @@ export const InvoiceFormModal: React.FC<InvoiceFormModalProps> = ({
                   type="text"
                   value={companyName}
                   onChange={(e) => setCompanyName(e.target.value)}
-                  placeholder="e.g. Mangalore Sweets & Bakers"
+                  placeholder="e.g. Godavari Sweets & Bakers"
                 />
               </div>
 

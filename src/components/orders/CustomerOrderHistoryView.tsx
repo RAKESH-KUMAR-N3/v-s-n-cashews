@@ -106,7 +106,7 @@ export const CustomerOrderHistoryView: React.FC<CustomerOrderHistoryViewProps> =
             <Package className="w-7 h-7 text-[#D4AF37]" /> Order History & Dispatch Tracking
           </h1>
           <p className="text-xs text-gray-300 mt-1">
-            Track real-time shipment updates, review tax invoices, or re-order your favorite Mangalore cashew grades.
+            Track real-time shipment updates, review tax invoices, or re-order your favorite Rajahmundry cashew grades.
           </p>
         </div>
 
@@ -168,7 +168,7 @@ export const CustomerOrderHistoryView: React.FC<CustomerOrderHistoryViewProps> =
           <p className="text-xs text-gray-400 max-w-md mx-auto">
             {searchTerm || selectedStatus !== 'ALL'
               ? 'No cashew orders match your search criteria. Try clearing search filters.'
-              : 'You have not placed any cashew orders yet. Explore our Mangalore catalog to place your first order.'}
+              : 'You have not placed any cashew orders yet. Explore our Rajahmundry catalog to place your first order.'}
           </p>
           <SquareButton variant="gold" onClick={onBackToCatalog}>
             <ShoppingBag className="w-4 h-4 mr-2" /> Explore Cashew Catalog

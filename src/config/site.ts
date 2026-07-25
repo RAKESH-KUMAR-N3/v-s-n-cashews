@@ -1,9 +1,9 @@
-export type ActiveView = 'home' | 'products' | 'about' | 'contact' | 'admin' | 'checkout' | 'orders' | 'quotes' | 'invoices';
+export type ActiveView = 'home' | 'products' | 'about' | 'contact' | 'admin' | 'checkout' | 'orders' | 'quotes' | 'invoices' | 'account' | 'notifications';
 
 export const SITE_CONFIG = {
   name: "V S N CASHEWS",
   tagline: "The Sovereign Grade Premium Cashew Nuts & Dry Fruits",
-  description: "Experience royal freshness with hand-sorted W-180 King Cashews, roasted gourmet flavors, and bespoke gift hampers direct from Kukatpally, Hyderabad.",
+  description: "Experience royal freshness with hand-sorted W-180 King Cashews, roasted gourmet flavors, and bespoke wholesale hampers direct from Rajahmundry, Andhra Pradesh.",
   url: process.env.VITE_APP_URL || "https://vsncashews.com",
   currencySymbol: "₹",
   currencyCode: "INR",
@@ -11,7 +11,7 @@ export const SITE_CONFIG = {
     phone: "+91 98450 12345",
     whatsapp: "+91 98450 12345",
     email: "orders@vsncashews.com",
-    address: "V S N Cashews, Main Road, Phase 1, Kukatpally, Hyderabad, Telangana 500072, India",
+    address: "V S N Cashews, Main Estate Road, Morampudi Junction, Rajahmundry, Andhra Pradesh 533107, India",
     workingHours: "Monday – Saturday: 8:30 AM – 7:30 PM (IST)",
   },
   social: {
@@ -19,7 +19,7 @@ export const SITE_CONFIG = {
     facebook: "https://facebook.com/vsncashews",
     youtube: "https://youtube.com/c/vsncashews",
   },
-  originStory: "Based in Kukatpally, Hyderabad, V S N CASHEWS selects only premium grade raw cashew nuts. Each nut undergoes 7-stage quality grading, gentle humidity drying, and vacuum sealing to ensure uncompromised crunch, butteriness, and royal taste.",
+  originStory: "Based in Rajahmundry, Andhra Pradesh, V S N CASHEWS selects only premium export-grade raw cashew nuts. Each nut undergoes 7-stage quality grading, gentle humidity drying, and vacuum sealing to ensure uncompromised crunch, butteriness, and royal taste.",
   navigation: [
     { label: "Home", view: "home" as ActiveView },
     { label: "Products", view: "products" as ActiveView },
@@ -29,8 +29,8 @@ export const SITE_CONFIG = {
   ],
   trustBadges: [
     { title: "100% Handpicked", desc: "Grade W-180 Jumbo Kernels" },
-    { title: "Hyderabad Direct", desc: "Express Dispatch in 24 Hours" },
+    { title: "Rajahmundry Direct", desc: "Express Dispatch in 24 Hours" },
     { title: "Vacuum Sealed", desc: "Nitrogen Flushed Freshness Lock" },
-    { title: "Razorpay Protected", desc: "256-bit Encrypted Checkout" }
+    { title: "Secure Checkout", desc: "256-bit Encrypted Checkout" }
   ]
 };

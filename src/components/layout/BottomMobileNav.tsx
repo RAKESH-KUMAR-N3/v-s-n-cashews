@@ -68,9 +68,9 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
         {/* 4. Login/Register OR Account */}
         {userMode === 'LOGGED_IN' ? (
           <button
-            onClick={onOpenAuthModal}
-            className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all ${
-              activeView === 'orders'
+            onClick={() => handleNav('account')}
+            className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all cursor-pointer ${
+              activeView === 'account' || activeView === 'orders'
                 ? 'text-[#D4AF37] font-bold scale-105'
                 : 'text-gray-300 hover:text-[#D4AF37]'
             }`}

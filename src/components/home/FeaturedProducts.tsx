@@ -1,11 +1,11 @@
+'use client';
+
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 import { Star, ShoppingBag, Eye, Check } from 'lucide-react';
 import { Product, CashewWeight } from '@/types';
 import { formatPrice } from '@/lib/utils';
-import { SquareCard } from '@/components/ui/SquareCard';
-import { SquareButton } from '@/components/ui/SquareButton';
 import { SquareBadge } from '@/components/ui/SquareBadge';
-import { OptimizedImage } from '@/components/ui/OptimizedImage';
 import { PRODUCTS_CATALOG } from '@/data/products';
 
 interface FeaturedProductsProps {
@@ -54,94 +54,81 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
   };
 
   return (
-    <section id="products" className="py-20 bg-[#1C2541]/40 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-12 space-y-2">
-          <SquareBadge variant="gold">Mangalore Reserve</SquareBadge>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F8F9FA]">
+    <section id="products" className="py-8 sm:py-16 bg-[#1C2541]/40 relative">
+      <div className="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-6 sm:mb-10 space-y-1.5">
+          <SquareBadge variant="gold">Rajahmundry Reserve</SquareBadge>
+          <h2 className="font-serif text-xl sm:text-3xl font-bold text-[#F8F9FA]">
             Signature Sovereign Collection
           </h2>
           <p className="text-xs text-gray-300">
-            Vacuum-sealed in nitrogen-flushed metalized pouches to preserve orchard crispness for up to 12 months.
+            Vacuum-sealed in nitrogen-flushed metalized pouches to preserve orchard crispness.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {/* Ultra-Compact Mobile Grid: 2 Columns on Mobile, 4 on Desktop */}
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-6">
           {filteredProducts.map((product) => {
             const currentWeight = selectedWeights[product.id] || '500g';
             const isAdded = addedItemMap[product.id];
 
             return (
-              <SquareCard
+              <motion.div
                 key={product.id}
-                glowOnHover
+                whileTap={{ scale: 0.98 }}
                 onClick={() => onSelectProduct?.(product)}
-                className="flex flex-col justify-between h-full bg-[#0B132B] cursor-pointer"
+                className="flex flex-col justify-between bg-[#0B132B] border border-[#D4AF37]/30 hover:border-[#D4AF37] p-2 sm:p-3.5 transition-all shadow-md relative group cursor-pointer"
               >
                 <div>
                   {/* Top Badges */}
-                  <div className="flex items-center justify-between mb-3">
-                    <SquareBadge variant="navy">{product.grade}</SquareBadge>
+                  <div className="flex items-center justify-between gap-1 mb-1.5">
+                    <span className="text-[8px] sm:text-xs font-bold px-1 py-0.5 bg-[#1C2541] text-[#D4AF37] border border-[#D4AF37]/30">
+                      {product.grade}
+                    </span>
                     {product.isBestSeller && (
-                      <SquareBadge variant="gold">Best Seller</SquareBadge>
+                      <span className="text-[8px] sm:text-xs font-extrabold px-1 py-0.5 bg-[#D4AF37] text-[#0B132B]">
+                        Best Seller
+                      </span>
                     )}
                   </div>
 
-                  {/* Image Container */}
-                  <div className="relative mb-4 overflow-hidden border border-[#D4AF37]/30 bg-[#1C2541] group">
-                    <OptimizedImage
+                  {/* Compact Product Image (Aspect 4/3 to reduce card height) */}
+                  <div className="relative mb-1.5 overflow-hidden border border-[#D4AF37]/20 bg-[#1C2541] aspect-[4/3]">
+                    <img
                       src={product.images[0]}
                       alt={product.name}
-                      aspectRatio="square"
-                      className="group-hover:scale-105 transition-transform duration-500"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
-                    <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          onSelectProduct?.(product);
-                        }}
-                        className="p-2 bg-[#D4AF37] text-[#0B132B] font-bold text-xs uppercase flex items-center gap-1 cursor-pointer hover:bg-white transition-colors"
-                      >
-                        <Eye className="w-4 h-4" /> Quick View
-                      </button>
-                    </div>
                   </div>
 
                   {/* Rating */}
                   <div className="flex items-center gap-1 mb-1">
                     <div className="flex text-[#D4AF37]">
                       {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-current" />
+                        <Star key={i} className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 fill-current" />
                       ))}
                     </div>
-                    <span className="text-[11px] font-semibold text-[#F3E5AB]">
-                      {product.rating} ({product.reviewCount})
+                    <span className="text-[9px] sm:text-[11px] font-semibold text-[#F3E5AB]">
+                      {product.rating}
                     </span>
                   </div>
 
-                  {/* Title & Description */}
-                  <h3 className="font-serif font-bold text-base text-[#F8F9FA] line-clamp-1 hover:text-[#D4AF37] transition-colors">
+                  {/* Product Title */}
+                  <h3 className="font-serif font-bold text-xs sm:text-base text-[#F8F9FA] line-clamp-1 hover:text-[#D4AF37]">
                     {product.name}
                   </h3>
-                  <p className="text-xs text-gray-400 mt-1 line-clamp-2 leading-relaxed">
-                    {product.description}
-                  </p>
 
-                  {/* Weight Options Selector */}
-                  <div className="mt-4 pt-3 border-t border-[#D4AF37]/20">
-                    <label className="text-[10px] font-bold uppercase tracking-widest text-[#D4AF37] block mb-1.5">
-                      Select Packaging Weight:
-                    </label>
-                    <div className="flex gap-1.5">
-                      {product.weights.map((w) => (
+                  {/* Compact Weight Selector */}
+                  <div className="mt-1.5 pt-1.5 border-t border-[#D4AF37]/20">
+                    <div className="flex gap-1">
+                      {product.weights.slice(0, 3).map((w) => (
                         <button
                           key={w}
                           onClick={(e) => handleWeightChange(product.id, w, e)}
-                          className={`flex-1 py-1 text-[11px] font-semibold border transition-all cursor-pointer ${
+                          className={`flex-1 py-0.5 text-[8px] sm:text-[10px] font-semibold border transition-all cursor-pointer ${
                             currentWeight === w
                               ? 'bg-[#D4AF37] text-[#0B132B] border-[#D4AF37]'
-                              : 'bg-[#1C2541] text-gray-300 border-[#D4AF37]/30 hover:border-[#D4AF37]'
+                              : 'bg-[#1C2541] text-gray-300 border-[#D4AF37]/30'
                           }`}
                         >
                           {w}
@@ -151,35 +138,32 @@ export const FeaturedProducts: React.FC<FeaturedProductsProps> = ({
                   </div>
                 </div>
 
-                {/* Price & Add to Cart */}
-                <div className="mt-6 pt-4 border-t border-[#D4AF37]/30 flex items-center justify-between gap-2">
-                  <div>
-                    <span className="text-xs text-gray-400 block line-through">
-                      {product.compareAtPrice && formatPrice(product.compareAtPrice)}
-                    </span>
-                    <span className="text-lg font-bold font-serif gold-gradient-text">
-                      {formatPrice(product.price)}
-                    </span>
-                  </div>
+                {/* Price & Add Button Inline Side-by-Side */}
+                <div className="mt-2 pt-1.5 border-t border-[#D4AF37]/30 flex items-center justify-between gap-1">
+                  <span className="text-xs sm:text-base font-bold font-serif gold-gradient-text">
+                    {formatPrice(product.price)}
+                  </span>
 
-                  <SquareButton
-                    variant={isAdded ? 'navy' : 'gold'}
-                    size="sm"
+                  <button
                     onClick={(e) => handleAdd(product, e)}
-                    className="shrink-0"
+                    className={`py-1 px-2 text-[9px] sm:text-xs font-bold uppercase tracking-wider flex items-center gap-1 transition-all cursor-pointer shrink-0 ${
+                      isAdded
+                        ? 'bg-emerald-600 text-white'
+                        : 'bg-gradient-to-r from-[#F3E5AB] via-[#D4AF37] to-[#AA7C11] text-[#0B132B] hover:opacity-90'
+                    }`}
                   >
                     {isAdded ? (
                       <>
-                        <Check className="w-4 h-4 text-emerald-400" /> Added
+                        <Check className="w-3 h-3" /> Added
                       </>
                     ) : (
                       <>
-                        <ShoppingBag className="w-4 h-4" /> Add To Bag
+                        <ShoppingBag className="w-3 h-3" /> Add
                       </>
                     )}
-                  </SquareButton>
+                  </button>
                 </div>
-              </SquareCard>
+              </motion.div>
             );
           })}
         </div>

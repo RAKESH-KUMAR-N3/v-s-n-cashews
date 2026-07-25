@@ -3,9 +3,9 @@
   "private": true,
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
+    "dev": "cmd /c \"set NODE_OPTIONS= && next dev\"",
+    "build": "cmd /c \"set NODE_OPTIONS= && next build\"",
+    "start": "cmd /c \"set NODE_OPTIONS= && next start\"",
     "lint": "next lint"
   },
   "dependencies": {

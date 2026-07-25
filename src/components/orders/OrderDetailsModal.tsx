@@ -62,7 +62,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
+      <div className="fixed inset-0 z-[200] flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -137,7 +137,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
                   FSSAI Lic No. 11218333000123 • GSTIN: 29AAAAA0000A1Z5
                 </p>
                 <p className="text-[10px] text-gray-400">
-                  Baikampady Industrial Estate, Mangalore, Karnataka 575011
+                  Morampudi Junction, Rajahmundry, Andhra Pradesh 533107
                 </p>
               </div>
 
@@ -236,7 +236,7 @@ export const OrderDetailsModal: React.FC<OrderDetailsModalProps> = ({
                   <ShieldCheck className="w-3.5 h-3.5 text-[#D4AF37]" /> Freshness Lock
                 </p>
                 <p>
-                  Handpacked and nitrogen flushed at Mangalore Orchards. Sealed for maximum crunch.
+                  Handpacked and nitrogen flushed at Rajahmundry Orchards. Sealed for maximum crunch.
                 </p>
               </div>
 
