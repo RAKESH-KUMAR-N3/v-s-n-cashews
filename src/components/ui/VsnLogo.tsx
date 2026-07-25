@@ -14,9 +14,9 @@ export const VsnLogo: React.FC<VsnLogoProps> = ({
   showText = false,
 }) => {
   const sizeMap = {
-    sm: 'h-8 sm:h-9 max-w-[90px]',
-    md: 'h-9 sm:h-12 max-w-[130px]',
-    lg: 'h-12 sm:h-16 max-w-[180px]',
+    sm: 'h-9 sm:h-10 max-w-[110px]',
+    md: 'h-11 sm:h-14 max-w-[145px]',
+    lg: 'h-14 sm:h-18 max-w-[200px]',
   };
 
   const currentSize = sizeMap[size];
@@ -27,7 +27,7 @@ export const VsnLogo: React.FC<VsnLogoProps> = ({
       <img
         src="/assets/v-s-n-logo.png"
         alt="V S N CASHEWS Logo"
-        className={`${currentSize} object-contain shrink-0 drop-shadow-[0_0_15px_rgba(212,175,55,0.5)] group-hover:scale-105 transition-all duration-300`}
+        className={`${currentSize} object-contain shrink-0 drop-shadow-[0_0_18px_rgba(212,175,55,0.6)] group-hover:scale-105 transition-all duration-300`}
       />
 
       {showText && (

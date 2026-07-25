@@ -24,8 +24,21 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
   };
 
   return (
-    <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-[#0B132B] border-t-2 border-[#D4AF37]/50 shadow-[0_-5px_25px_rgba(0,0,0,0.6)]">
-      <div className="grid grid-cols-4 h-16 items-center px-1">
+    <nav
+      style={{
+        position: 'fixed',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        zIndex: 99999,
+        backgroundColor: '#0B132B',
+        borderTop: '2px solid #D4AF37',
+        height: '64px',
+        boxShadow: '0 -5px 25px rgba(0,0,0,0.9)',
+      }}
+      className="lg:hidden w-full flex items-center"
+    >
+      <div className="w-full grid grid-cols-4 items-center px-1">
         {/* 1. Home */}
         <button
           onClick={() => handleNav('home')}
@@ -35,8 +48,8 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
               : 'text-gray-400 hover:text-[#D4AF37]'
           }`}
         >
-          <Home className="w-5 h-5" />
-          <span className="text-[10px] uppercase tracking-wider font-semibold">Home</span>
+          <Home className="w-5 h-5 text-[#D4AF37]" />
+          <span className="text-[10px] uppercase tracking-wider font-semibold text-white">Home</span>
         </button>
 
         {/* 2. Products */}
@@ -48,8 +61,8 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
               : 'text-gray-400 hover:text-[#D4AF37]'
           }`}
         >
-          <Package className="w-5 h-5" />
-          <span className="text-[10px] uppercase tracking-wider font-semibold">Products</span>
+          <Package className="w-5 h-5 text-[#D4AF37]" />
+          <span className="text-[10px] uppercase tracking-wider font-semibold text-white">Products</span>
         </button>
 
         {/* 3. Contact */}
@@ -61,11 +74,11 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
               : 'text-gray-400 hover:text-[#D4AF37]'
           }`}
         >
-          <PhoneCall className="w-5 h-5" />
-          <span className="text-[10px] uppercase tracking-wider font-semibold">Contact</span>
+          <PhoneCall className="w-5 h-5 text-[#D4AF37]" />
+          <span className="text-[10px] uppercase tracking-wider font-semibold text-white">Contact</span>
         </button>
 
-        {/* 4. Login/Register OR Account (In place of login after logged in) */}
+        {/* 4. Login/Register OR Account */}
         {userMode === 'LOGGED_IN' ? (
           <button
             onClick={() => handleNav('orders')}
@@ -85,8 +98,8 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
             onClick={onOpenAuthModal}
             className="flex flex-col items-center justify-center gap-1 py-1 text-[#D4AF37] hover:text-[#F3E5AB] font-bold"
           >
-            <LogIn className="w-5 h-5" />
-            <span className="text-[9px] uppercase tracking-tighter">Login/Reg</span>
+            <LogIn className="w-5 h-5 text-[#D4AF37]" />
+            <span className="text-[9px] uppercase tracking-tighter text-[#D4AF37]">Login/Reg</span>
           </button>
         )}
       </div>

@@ -66,7 +66,7 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B132B] text-[#F8F9FA] selection:bg-[#D4AF37] selection:text-[#0B132B] pb-16 lg:pb-0">
+    <div className="min-h-screen flex flex-col bg-[#0B132B] text-[#F8F9FA] selection:bg-[#D4AF37] selection:text-[#0B132B] pb-20 lg:pb-0">
       {/* Top Header */}
       <Header
         activeView={getActiveView()}
