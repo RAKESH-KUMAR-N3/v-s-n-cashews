@@ -290,15 +290,15 @@ export const ProductFormModal: React.FC<ProductFormModalProps> = ({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm animate-fade-in">
-      <div className="relative w-full max-w-4xl bg-[#0B132B] border-2 border-[#D4AF37] p-6 text-[#F8F9FA] shadow-2xl max-h-[92vh] overflow-y-auto flex flex-col">
+    <div className="fixed inset-0 z-[9999999] flex items-center justify-center p-2 sm:p-6 bg-black/90 backdrop-blur-md animate-fade-in">
+      <div className="relative w-full max-w-4xl bg-[#0B132B] border border-[#D4AF37]/50 p-4 sm:p-6 text-[#F8F9FA] shadow-2xl max-h-[96vh] overflow-y-auto flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between pb-4 border-b border-[#D4AF37]/30">
+        <div className="flex items-center justify-between pb-3 border-b border-[#D4AF37]/30">
           <div>
-            <span className="text-[10px] font-bold uppercase tracking-widest text-[#D4AF37]">
+            <span className="text-[9px] font-bold uppercase tracking-widest text-[#D4AF37]">
               Mangalore Product Management
             </span>
-            <h2 className="font-serif text-2xl font-bold text-[#F3E5AB]">
+            <h2 className="font-serif text-lg sm:text-2xl font-bold text-[#F3E5AB]">
               {productToEdit ? `Edit Product: ${productToEdit.name}` : 'Add New Product to Catalog'}
             </h2>
           </div>

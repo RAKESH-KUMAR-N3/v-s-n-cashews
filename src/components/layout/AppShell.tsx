@@ -84,27 +84,31 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
     }
   };
 
+  const isAdminPage = pathname === '/admin' || pathname?.startsWith('/admin');
+
   return (
     <div className="min-h-screen flex flex-col bg-[#0B132B] text-[#F8F9FA] selection:bg-[#D4AF37] selection:text-[#0B132B] pb-20 lg:pb-0 max-w-[100vw] overflow-x-hidden">
       {/* Mobile Animated Splash Screen Overlay */}
       {showSplash && <MobileSplashScreen onContinue={handleSplashContinue} />}
 
-      {/* Top Header */}
-      <Header
-        activeView={getActiveView()}
-        onNavigate={handleNavigate}
-        cartCount={totalCartCount}
-        onOpenCart={() => setIsCartOpen(true)}
-        onOpenAuthModal={() => setIsAuthModalOpen(true)}
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-      />
+      {/* Top Header (Hidden on Admin pages) */}
+      {!isAdminPage && (
+        <Header
+          activeView={getActiveView()}
+          onNavigate={handleNavigate}
+          cartCount={totalCartCount}
+          onOpenCart={() => setIsCartOpen(true)}
+          onOpenAuthModal={() => setIsAuthModalOpen(true)}
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
+        />
+      )}
 
       {/* Main Content Router */}
       <main className="flex-1">{children}</main>
 
-      {/* Mobile Bottom Navigation Bar (Hidden while splash screen or Auth modal is active) */}
-      {!showSplash && !isAuthModalOpen && (
+      {/* Mobile Bottom Navigation Bar (Hidden while splash screen, Auth modal, or Admin page is active) */}
+      {!showSplash && !isAuthModalOpen && !isAdminPage && (
         <BottomMobileNav
           activeView={getActiveView()}
           onNavigate={handleNavigate}
@@ -129,8 +133,8 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
       {/* PWA Prompt */}
       <PwaInstallPrompt />
 
-      {/* Footer */}
-      <Footer onNavigate={handleNavigate} />
+      {/* Footer (Hidden on Admin pages) */}
+      {!isAdminPage && <Footer onNavigate={handleNavigate} />}
     </div>
   );
 };
