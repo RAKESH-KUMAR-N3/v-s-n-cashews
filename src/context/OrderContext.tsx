@@ -1,3 +1,5 @@
+'use client';
+
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Order } from '@/types';
 import { INITIAL_MOCK_ORDERS } from '@/data/mockOrders';
