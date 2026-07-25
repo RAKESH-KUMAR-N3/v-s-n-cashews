@@ -14,11 +14,18 @@
     --navy-slate: #3A506B;
   }
 
-  body {
+  html, body {
+    max-width: 100vw;
+    overflow-x: hidden !important;
+    margin: 0;
+    padding: 0;
     background-color: #0B132B;
     color: #F8F9FA;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    overflow-x: hidden;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
 
   /* Custom selection */
@@ -28,33 +35,34 @@
   }
 }
 
-/* Force Mobile Bottom Navbar visibility on all screens < 1024px */
+/* Fixed Viewport Bottom Navbar for Mobile */
 @media (max-width: 1023px) {
-  .mobile-bottom-navbar {
+  .mobile-bottom-nav-fixed {
     display: flex !important;
     position: fixed !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
     width: 100vw !important;
-    height: 64px !important;
+    height: 60px !important;
     z-index: 999999 !important;
-    background-color: #0B132B !important;
-    border-top: 2px solid #D4AF37 !important;
-    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.9) !important;
+    background-color: rgba(11, 19, 43, 0.98) !important;
+    backdrop-filter: blur(12px) !important;
+    border-top: 1px solid rgba(212, 175, 55, 0.4) !important;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.8) !important;
   }
 }
 
 @media (min-width: 1024px) {
-  .mobile-bottom-navbar {
+  .mobile-bottom-nav-fixed {
     display: none !important;
   }
 }
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
   background: #0B132B;
@@ -69,7 +77,7 @@
 
 /* Metallic Gold Text Effect */
 .gold-gradient-text {
-  background: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #AA7C11 100%);
+  background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 50%, #AA7C11 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -82,23 +90,6 @@
 .gold-border-glow {
   border: 1px solid rgba(212, 175, 55, 0.6);
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
-}
-
-/* Shimmer Animation */
-@keyframes gold-shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
-}
-
-.shimmer-gold {
-  background: linear-gradient(
-    90deg,
-    rgba(212, 175, 55, 0) 0%,
-    rgba(243, 229, 171, 0.25) 50%,
-    rgba(212, 175, 55, 0) 100%
-  );
-  background-size: 200% 100%;
-  animation: gold-shimmer 3s infinite linear;
 }
 
 /* Strictly Square Design Utility */

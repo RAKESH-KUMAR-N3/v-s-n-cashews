@@ -24,69 +24,69 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
   };
 
   return (
-    <nav className="mobile-bottom-navbar w-full flex items-center">
+    <nav className="mobile-bottom-nav-fixed">
       <div className="w-full grid grid-cols-4 items-center px-1">
         {/* 1. Home */}
         <button
           onClick={() => handleNav('home')}
-          className={`flex flex-col items-center justify-center gap-1 py-1 transition-all ${
+          className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all ${
             activeView === 'home'
               ? 'text-[#D4AF37] font-bold scale-105'
               : 'text-gray-400 hover:text-[#D4AF37]'
           }`}
         >
-          <Home className="w-5 h-5 text-[#D4AF37]" />
-          <span className="text-[10px] uppercase tracking-wider font-semibold text-white">Home</span>
+          <Home className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37]" />
+          <span className="text-[9px] uppercase tracking-wider font-semibold text-white">Home</span>
         </button>
 
         {/* 2. Products */}
         <button
           onClick={() => handleNav('products')}
-          className={`flex flex-col items-center justify-center gap-1 py-1 transition-all ${
+          className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all ${
             activeView === 'products'
               ? 'text-[#D4AF37] font-bold scale-105'
               : 'text-gray-400 hover:text-[#D4AF37]'
           }`}
         >
-          <Package className="w-5 h-5 text-[#D4AF37]" />
-          <span className="text-[10px] uppercase tracking-wider font-semibold text-white">Products</span>
+          <Package className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37]" />
+          <span className="text-[9px] uppercase tracking-wider font-semibold text-white">Products</span>
         </button>
 
         {/* 3. Contact */}
         <button
           onClick={() => handleNav('contact')}
-          className={`flex flex-col items-center justify-center gap-1 py-1 transition-all ${
+          className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all ${
             activeView === 'contact'
               ? 'text-[#D4AF37] font-bold scale-105'
               : 'text-gray-400 hover:text-[#D4AF37]'
           }`}
         >
-          <PhoneCall className="w-5 h-5 text-[#D4AF37]" />
-          <span className="text-[10px] uppercase tracking-wider font-semibold text-white">Contact</span>
+          <PhoneCall className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37]" />
+          <span className="text-[9px] uppercase tracking-wider font-semibold text-white">Contact</span>
         </button>
 
         {/* 4. Login/Register OR Account */}
         {userMode === 'LOGGED_IN' ? (
           <button
             onClick={() => handleNav('orders')}
-            className={`flex flex-col items-center justify-center gap-1 py-1 transition-all ${
+            className={`flex flex-col items-center justify-center gap-0.5 py-1 transition-all ${
               activeView === 'orders'
                 ? 'text-[#D4AF37] font-bold scale-105'
                 : 'text-gray-300 hover:text-[#D4AF37]'
             }`}
           >
-            <User className="w-5 h-5 text-[#D4AF37]" />
-            <span className="text-[10px] uppercase tracking-wider font-semibold text-[#F3E5AB] max-w-[65px] truncate">
+            <User className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37]" />
+            <span className="text-[9px] uppercase tracking-wider font-semibold text-[#F3E5AB] max-w-[60px] truncate">
               {userProfile?.name?.split(' ')[0] || 'Account'}
             </span>
           </button>
         ) : (
           <button
             onClick={onOpenAuthModal}
-            className="flex flex-col items-center justify-center gap-1 py-1 text-[#D4AF37] hover:text-[#F3E5AB] font-bold"
+            className="flex flex-col items-center justify-center gap-0.5 py-1 text-[#D4AF37] hover:text-[#F3E5AB] font-bold"
           >
-            <LogIn className="w-5 h-5 text-[#D4AF37]" />
-            <span className="text-[9px] uppercase tracking-tighter text-[#D4AF37]">Login/Reg</span>
+            <LogIn className="w-4 h-4 sm:w-5 sm:h-5 text-[#D4AF37]" />
+            <span className="text-[9px] uppercase tracking-tighter text-[#D4AF37]">Login</span>
           </button>
         )}
       </div>
