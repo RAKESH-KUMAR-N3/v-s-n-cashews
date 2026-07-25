@@ -24,20 +24,7 @@ export const BottomMobileNav: React.FC<BottomMobileNavProps> = ({
   };
 
   return (
-    <nav
-      style={{
-        position: 'fixed',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 99999,
-        backgroundColor: '#0B132B',
-        borderTop: '2px solid #D4AF37',
-        height: '64px',
-        boxShadow: '0 -5px 25px rgba(0,0,0,0.9)',
-      }}
-      className="lg:hidden w-full flex items-center"
-    >
+    <nav className="mobile-bottom-navbar w-full flex items-center">
       <div className="w-full grid grid-cols-4 items-center px-1">
         {/* 1. Home */}
         <button

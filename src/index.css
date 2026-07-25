@@ -28,6 +28,29 @@
   }
 }
 
+/* Force Mobile Bottom Navbar visibility on all screens < 1024px */
+@media (max-width: 1023px) {
+  .mobile-bottom-navbar {
+    display: flex !important;
+    position: fixed !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100vw !important;
+    height: 64px !important;
+    z-index: 999999 !important;
+    background-color: #0B132B !important;
+    border-top: 2px solid #D4AF37 !important;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.9) !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .mobile-bottom-navbar {
+    display: none !important;
+  }
+}
+
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;

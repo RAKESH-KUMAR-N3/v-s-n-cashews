@@ -11,35 +11,31 @@ interface VsnLogoProps {
 export const VsnLogo: React.FC<VsnLogoProps> = ({
   className = '',
   size = 'md',
-  showText = false,
+  showText = true,
 }) => {
   const sizeMap = {
-    sm: 'h-9 sm:h-10 max-w-[110px]',
-    md: 'h-11 sm:h-14 max-w-[145px]',
-    lg: 'h-14 sm:h-18 max-w-[200px]',
+    sm: 'h-10 sm:h-11 max-w-[125px]',
+    md: 'h-12 sm:h-15 max-w-[155px]',
+    lg: 'h-15 sm:h-18 max-w-[210px]',
   };
 
   const currentSize = sizeMap[size];
 
   return (
     <div className={`inline-flex items-center gap-2 group cursor-pointer ${className}`}>
-      {/* V S N Elevated 3D Logo Image */}
+      {/* V S N Elevated 3D Logo Image (Increased size by 2%) */}
       <img
         src="/assets/v-s-n-logo.png"
         alt="V S N CASHEWS Logo"
-        className={`${currentSize} object-contain shrink-0 drop-shadow-[0_0_18px_rgba(212,175,55,0.6)] group-hover:scale-105 transition-all duration-300`}
+        className={`${currentSize} object-contain shrink-0 drop-shadow-[0_0_20px_rgba(212,175,55,0.65)] group-hover:scale-105 transition-all duration-300`}
       />
 
-      {showText && (
-        <div className="hidden md:flex flex-col text-left">
-          <span className="font-serif text-lg font-black tracking-wider text-[#F8F9FA] group-hover:text-[#D4AF37] transition-colors leading-none whitespace-nowrap">
-            V S N CASHEWS
-          </span>
-          <span className="text-[9px] uppercase tracking-[0.15em] text-[#D4AF37] font-semibold mt-1 whitespace-nowrap">
-            Kukatpally • Hyderabad
-          </span>
-        </div>
-      )}
+      {/* Royal Gold Badge reading CASHEWS right next to logo */}
+      <div className="flex items-center bg-[#1C2541]/90 border border-[#D4AF37] px-2.5 py-0.5 shadow-[0_0_12px_rgba(212,175,55,0.3)] group-hover:border-[#F3E5AB] transition-colors">
+        <span className="font-serif text-xs sm:text-sm font-extrabold tracking-widest text-[#F3E5AB] group-hover:text-[#D4AF37] uppercase whitespace-nowrap">
+          CASHEWS
+        </span>
+      </div>
     </div>
   );
 };
