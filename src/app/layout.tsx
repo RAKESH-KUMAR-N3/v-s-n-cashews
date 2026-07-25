@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import '@/index.css';
 import { CartProvider } from '@/context/CartContext';
+import { OrderProvider } from '@/context/OrderContext';
+import { InvoiceProvider } from '@/context/InvoiceContext';
+import { QuoteProvider } from '@/context/QuoteContext';
 import { AppShell } from '@/components/layout/AppShell';
 
 export const metadata: Metadata = {
@@ -32,7 +35,13 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <CartProvider>
-          <AppShell>{children}</AppShell>
+          <OrderProvider>
+            <InvoiceProvider>
+              <QuoteProvider>
+                <AppShell>{children}</AppShell>
+              </QuoteProvider>
+            </InvoiceProvider>
+          </OrderProvider>
         </CartProvider>
       </body>
     </html>
