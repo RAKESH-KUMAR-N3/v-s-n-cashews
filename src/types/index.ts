@@ -85,6 +85,7 @@ export interface CartUserProfile {
   email: string;
   isRoyalMember: boolean;
   memberDiscountPercent: number;
+  isAdmin?: boolean;
 }
 
 export type AddressLabel = 'Home' | 'Office' | 'Estate' | 'Gifting' | 'Other';

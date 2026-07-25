@@ -1,16 +1,16 @@
-import {StrictMode} from 'react';
-import {createRoot} from 'react-dom/client';
-import { HelmetProvider } from 'react-helmet-async';
-import App from './App.tsx';
-import { CartProvider } from './context/CartContext.tsx';
-import { OrderProvider } from './context/OrderContext.tsx';
-import { QuoteProvider } from './context/QuoteContext.tsx';
-import { InvoiceProvider } from './context/InvoiceContext.tsx';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App';
+import { CartProvider } from './context/CartContext';
+import { OrderProvider } from './context/OrderContext';
+import { QuoteProvider } from './context/QuoteContext';
+import { InvoiceProvider } from './context/InvoiceContext';
 import './index.css';
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <HelmetProvider>
+const rootEl = document.getElementById('root');
+if (rootEl) {
+  createRoot(rootEl).render(
+    <StrictMode>
       <CartProvider>
         <OrderProvider>
           <QuoteProvider>
@@ -20,6 +20,6 @@ createRoot(document.getElementById('root')!).render(
           </QuoteProvider>
         </OrderProvider>
       </CartProvider>
-    </HelmetProvider>
-  </StrictMode>,
-);
+    </StrictMode>,
+  );
+}

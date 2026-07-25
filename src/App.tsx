@@ -211,7 +211,6 @@ export default function App() {
         onOpenAuthModal={() => setIsAuthModalOpen(true)}
         searchTerm={searchTerm}
         onSearchChange={setSearchTerm}
-        onToggleMobileNav={() => setIsMobileNavOpen(true)}
       />
 
       {/* Mobile Drawer Navigation */}

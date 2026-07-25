@@ -12,9 +12,9 @@ export const VsnLogo: React.FC<VsnLogoProps> = ({
   size = 'md',
 }) => {
   const sizeMap = {
-    sm: { img: 'h-8 sm:h-9', text: 'text-sm' },
-    md: { img: 'h-10 sm:h-12', text: 'text-base sm:text-lg' },
-    lg: { img: 'h-12 sm:h-15', text: 'text-lg sm:text-xl' },
+    sm: { img: 'h-9 sm:h-10', text: 'text-sm sm:text-base' },
+    md: { img: 'h-11 sm:h-13', text: 'text-base sm:text-lg' },
+    lg: { img: 'h-14 sm:h-16', text: 'text-lg sm:text-xl' },
   };
 
   const currentSize = sizeMap[size];
@@ -25,16 +25,13 @@ export const VsnLogo: React.FC<VsnLogoProps> = ({
       <img
         src="/assets/v-s-n-logo.png"
         alt="V S N CASHEWS Logo"
-        className={`${currentSize.img} object-contain shrink-0 drop-shadow-[0_0_15px_rgba(212,175,55,0.6)] group-hover:scale-105 transition-all duration-300`}
+        className={`${currentSize.img} object-contain shrink-0 drop-shadow-[0_0_18px_rgba(212,175,55,0.7)] group-hover:scale-105 transition-all duration-300`}
       />
 
-      {/* Clean elegant text next to logo without any box */}
+      {/* Clean elegant gold CASHEWS typography without Kukatpally text */}
       <div className="flex flex-col text-left">
-        <span className={`font-serif ${currentSize.text} font-extrabold tracking-widest gold-gradient-text leading-none whitespace-nowrap`}>
+        <span className={`font-serif ${currentSize.text} font-black tracking-[0.18em] gold-gradient-text leading-none whitespace-nowrap uppercase`}>
           CASHEWS
-        </span>
-        <span className="text-[8px] uppercase tracking-[0.2em] text-[#D4AF37] font-semibold mt-0.5 whitespace-nowrap">
-          Kukatpally • Hyd
         </span>
       </div>
     </div>

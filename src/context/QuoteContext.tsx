@@ -35,6 +35,7 @@ const QuoteContext = createContext<QuoteContextType | undefined>(undefined);
 
 export const QuoteProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [quotes, setQuotes] = useState<Quotation[]>(() => {
+    if (typeof window === 'undefined') return INITIAL_MOCK_QUOTES;
     try {
       const saved = localStorage.getItem(QUOTES_STORAGE_KEY);
       if (saved) {

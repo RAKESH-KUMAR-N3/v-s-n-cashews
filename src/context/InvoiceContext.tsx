@@ -256,6 +256,7 @@ export const QuoteProvider: React.FC = ({ children }: any) => {
 
 export const InvoiceProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [invoices, setInvoices] = useState<Invoice[]>(() => {
+    if (typeof window === 'undefined') return INITIAL_INVOICES;
     try {
       const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
       if (saved) {

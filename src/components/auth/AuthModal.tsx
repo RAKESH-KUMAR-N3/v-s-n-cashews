@@ -176,13 +176,13 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, onNavigat
           </button>
         </div>
 
-        {/* Main Center Full-Screen Form Container (No card border box!) */}
-        <div className="flex-1 flex flex-col items-center justify-center my-auto z-10 w-full max-w-md mx-auto py-6">
+        {/* Main Center Full-Screen Form Container (Moved up to eliminate top empty space) */}
+        <div className="flex-1 flex flex-col items-center justify-start z-10 w-full max-w-md mx-auto pt-2 sm:pt-4 pb-6">
           {/* Floating Logo Header */}
           <motion.div
-            animate={{ y: [-5, 5, -5] }}
+            animate={{ y: [-4, 4, -4] }}
             transition={{ repeat: Infinity, duration: 4, ease: 'easeInOut' }}
-            className="flex flex-col items-center mb-6 text-center cursor-pointer"
+            className="flex flex-col items-center mb-3 text-center cursor-pointer"
             onClick={onClose}
           >
             <div className="relative mb-2">

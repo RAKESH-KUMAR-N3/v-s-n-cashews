@@ -20,6 +20,7 @@ const OrderContext = createContext<OrderContextType | undefined>(undefined);
 
 export const OrderProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [orders, setOrders] = useState<Order[]>(() => {
+    if (typeof window === 'undefined') return INITIAL_MOCK_ORDERS;
     try {
       const saved = localStorage.getItem(ORDERS_STORAGE_KEY);
       if (saved) {

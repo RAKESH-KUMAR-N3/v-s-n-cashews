@@ -19,6 +19,7 @@ import {
   Sparkles,
   MapPin,
   RefreshCw,
+  LogOut,
 } from 'lucide-react';
 import { Order } from '@/types';
 import { formatPrice } from '@/lib/utils';
@@ -37,7 +38,7 @@ export const CustomerOrderHistoryView: React.FC<CustomerOrderHistoryViewProps> =
   onBackToCatalog,
 }) => {
   const { orders } = useOrders();
-  const { userProfile, addToCart } = useCart();
+  const { userProfile, addToCart, logoutUser } = useCart();
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStatus, setSelectedStatus] = useState<string>('ALL');
@@ -113,6 +114,17 @@ export const CustomerOrderHistoryView: React.FC<CustomerOrderHistoryViewProps> =
           <SquareBadge variant="gold" className="text-xs flex items-center gap-1">
             <Crown className="w-3.5 h-3.5" /> Royal Patron Logged In
           </SquareBadge>
+
+          <button
+            onClick={() => {
+              logoutUser();
+              onBackToCatalog();
+            }}
+            className="py-1.5 px-3 bg-red-950/60 hover:bg-red-900 border border-red-500/60 text-red-200 text-xs font-semibold uppercase tracking-wider flex items-center gap-1 cursor-pointer transition-colors"
+            title="Sign Out of Account"
+          >
+            <LogOut className="w-3.5 h-3.5" /> Sign Out
+          </button>
         </div>
       </div>
 
