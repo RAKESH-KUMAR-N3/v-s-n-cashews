@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -8,6 +8,7 @@ import { BottomMobileNav } from '@/components/layout/BottomMobileNav';
 import { CartDrawer } from '@/components/cart/CartDrawer';
 import { AuthModal } from '@/components/auth/AuthModal';
 import { PwaInstallPrompt } from '@/components/pwa/PwaInstallPrompt';
+import { MobileSplashScreen } from '@/components/splash/MobileSplashScreen';
 import { useCart } from '@/context/CartContext';
 import { ActiveView } from '@/config/site';
 
@@ -17,8 +18,26 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [showSplash, setShowSplash] = useState(false);
 
   const { totalCartCount } = useCart();
+
+  useEffect(() => {
+    // Check if on mobile view and splash has not been shown in this session
+    if (typeof window !== 'undefined' && window.innerWidth < 1024) {
+      const dismissed = sessionStorage.getItem('vsn_mobile_splash_shown');
+      if (!dismissed) {
+        setShowSplash(true);
+      }
+    }
+  }, []);
+
+  const handleSplashContinue = () => {
+    sessionStorage.setItem('vsn_mobile_splash_shown', 'true');
+    setShowSplash(false);
+    // Open Login/Register Modal as requested
+    setIsAuthModalOpen(true);
+  };
 
   // Map pathname to ActiveView
   const getActiveView = (): ActiveView => {
@@ -66,7 +85,10 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#0B132B] text-[#F8F9FA] selection:bg-[#D4AF37] selection:text-[#0B132B] pb-20 lg:pb-0">
+    <div className="min-h-screen flex flex-col bg-[#0B132B] text-[#F8F9FA] selection:bg-[#D4AF37] selection:text-[#0B132B] pb-20 lg:pb-0 max-w-[100vw] overflow-x-hidden">
+      {/* Mobile Animated Splash Screen Overlay */}
+      {showSplash && <MobileSplashScreen onContinue={handleSplashContinue} />}
+
       {/* Top Header */}
       <Header
         activeView={getActiveView()}
@@ -81,12 +103,14 @@ export const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) 
       {/* Main Content Router */}
       <main className="flex-1">{children}</main>
 
-      {/* Mobile Bottom Navigation Bar */}
-      <BottomMobileNav
-        activeView={getActiveView()}
-        onNavigate={handleNavigate}
-        onOpenAuthModal={() => setIsAuthModalOpen(true)}
-      />
+      {/* Mobile Bottom Navigation Bar (Hidden while splash screen or Auth modal is active) */}
+      {!showSplash && !isAuthModalOpen && (
+        <BottomMobileNav
+          activeView={getActiveView()}
+          onNavigate={handleNavigate}
+          onOpenAuthModal={() => setIsAuthModalOpen(true)}
+        />
+      )}
 
       {/* Cart Drawer */}
       <CartDrawer
